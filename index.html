@@ -1,0 +1,3059 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABC Capital Corporation</title>
+
+    <!-- favicons Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="images/logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/logo.png">
+    <link rel="manifest" href="assets/img/favicons/site.webmanifest">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- swiper slider css -->
+    <link rel="stylesheet" href="css/swiper-bundle.min.css">
+    <!-- odometer css -->
+    <link rel="stylesheet" href="css/odometer-theme-default.css">
+    <!-- css start -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+    <style>
+      .investment_counter_main {
+        background: linear-gradient(303.78deg, #f04023 0%, #faa640 100%);
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        border-radius: 10px;
+      }
+
+      .investment_counter_content {
+        display: flex;
+        width: 74%;
+        align-items: center;
+
+        width: 100%;
+        display: flex;
+        align-items: center;
+      }
+
+      .investment_counter_content_sub {
+        display: flex;
+        width: 74%;
+        align-items: center;
+      }
+
+      .investment_counter_item {
+        margin-right: 20px;
+        width: 32%;
+      }
+
+      .investment_counter_item h5 {
+        font-size: 18px;
+        color: gray;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+
+      .range_slider input {
+        border: none;
+        outline: none;
+        position: relative;
+      }
+
+      .range_slider input:focus {
+        outline: none;
+      }
+
+      .range_slider .currency {
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        font-weight: 700;
+      }
+
+      .range_slider > .range > input {
+        width: 100%;
+        accent-color: #f04023;
+      }
+
+      .range_slider_item {
+        display: flex;
+        justify-content: space-between;
+        padding: 0;
+        margin-bottom: 10px;
+      }
+
+      .range_slider_item input {
+        font-size: 26px;
+        font-family: "M-BO";
+        color: var(--bg-color);
+        background-color: transparent;
+        line-height: 1;
+        font-weight: 700;
+      }
+
+      .counter_footer {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .range input {
+        margin: 0 !important;
+      }
+
+      .range {
+        display: flex;
+		height: 16px;
+      }
+
+      select {
+        padding: 0;
+        font-size: 24px;
+        height: 100%;
+        background: white;
+        border: none;
+        border-radius: 10px;
+        outline: none;
+        width: 100%;
+        -webkit-appearance: none;
+      }
+
+      .total_investment h5 {
+        font-size: 17px;
+        color: gray;
+        margin-bottom: 10px;
+      }
+
+      .total_investment h2 {
+        font-size: 30px;
+        margin: 10px 0;
+      }
+
+      .total_investment p {
+        font-size: 17px;
+        font-weight: 600;
+      }
+
+      .total_investment_main button {
+        width: 100%;
+        padding: 37px 30px;
+        background: #f04023;
+        color: white;
+        font-size: 20px;
+        font-weight: 600;
+        border: none;
+      }
+
+      .total_investment_main {
+        width: 20%;
+      }
+
+      .hide {
+        display: none;
+      }
+
+      @media screen and (max-width: 990px) {
+        .range_slider_item input {
+          font-size: 21px;
+        }
+
+        .total_investment h2 {
+          font-size: 24px;
+        }
+
+        .total_investment h5 {
+          font-size: 14px;
+        }
+
+        .invest_select_main {
+          top: 0;
+          height: 58px;
+        }
+
+        .total_investment p {
+          font-size: 13px;
+        }
+
+        .total_investment_main button {
+          font-size: 14px;
+        }
+
+        .counter_footer {
+          font-size: 12px;
+        }
+
+        select {
+          font-size: 16px;
+        }
+
+        select {
+          padding: 0px 21px;
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        .invest_select_main {
+          height: 100%;
+        }
+
+        .investment_counter_main {
+          flex-direction: column;
+        }
+
+        .investment_counter_content {
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .investment_counter_content_sub {
+          width: 100%;
+        }
+
+        .investment_counter_item {
+          margin: 0;
+          width: 100%;
+          margin-bottom: 30px;
+        }
+
+        .total_investment_main {
+          width: 100%;
+        }
+
+        .member-btn {
+          margin-top: 20px;
+        }
+      }
+
+      @media screen and (max-width: 350px) {
+        .investment_counter_item h5 {
+          font-size: 15px;
+        }
+      }
+    </style>
+  </head>
+<body>
+    <!-- scroll to top start -->
+
+    <div class="scrollTop" style="display: none">
+      <img src="images/uparrow.svg" class="svg" alt="">
+    </div>
+
+    <!-- scroll to top end -->
+
+    <!-- floating call start -->
+
+    <a href="tel:+41 (22) 502 75 98" class="floatingCall__">
+      <dotlottie-player src="https://lottie.host/39efad7f-900c-4a7b-91c3-5d9e3e1e49d9/zdDu5shfzY.json" background="transparent.html" speed="1" style="width: 80px; height: 80px" loop="" autoplay=""></dotlottie-player>
+      <div class="floatingCall__Content__">
+        <div class="floatingCall__Content__Heading">
+          <h4>
+            <span>+41 (22) 502 75 98</span> Rufen Sie unsere Fachberater an
+          </h4>
+        </div>
+      </div>
+    </a>
+
+    <!-- floating call end -->
+
+    <!-- sidebar start -->
+
+    <div class="sideBar__">
+      <div class="sideBar__Header__">
+        <div class="sideBar__Header__Logo">
+          <a href="#home">
+            <img src="images/logo.png" alt="">
+          </a>
+        </div>
+        <div class="sideBar__Header__Close">
+          <img src="images/close.svg" class="svg" alt="">
+        </div>
+      </div>
+      <div class="sideBar__Body__">
+        <ul>
+          <li class=""><a href="#home">Home</a></li>
+          <li class="sideBar_drop">
+            <a class="sideBar_drop_anker"><span>Geldanlagen</span><span><img src="images/arrow_down.svg" alt=""></span></a>
+            <div class="sideBar_down">
+             <ul>
+                      <li><a href="#termingeld">Termingeld</a></li>
+                      <li><a href="#flexgeld">Flexgeld</a></li>
+                      <li><a href="#kollektiv-pool">Kollektiv-Pool</a></li>
+                      
+                      <li><a href="#etf">ETFs</a></li>
+                      
+                      
+                    </ul>
+            </div>
+          </li>
+
+          <li class="sideBar_drop">
+            <a class="sideBar_drop_anker"><span>Einlagensicherungen</span><span><img src="images/arrow_down.svg" alt=""></span></a>
+            <div class="sideBar_down">
+              <ul>
+                <li>
+                  <a href="#einlagensicherung">EU Einlagensicherung</a>
+                </li>
+                <li>
+                  <a href="#freiwilligeeinlagensicherung">Freiwillige Einlagensicherung</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <li class=""><a href="#about">Über Uns</a></li>
+          <li class=""><a href="#contact">Kontakt</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- sidebar end -->
+
+    <!-- header start -->
+    <header>
+      <div class="container">
+        <div class="row">
+          <div class="col-4 col-lg-3 align-self-center d-none d-lg-block">
+            <div class="logo">
+              <a href="./#home">
+                <img src="images/logo.png" alt="" style="margin-left: 50px;">
+              </a>
+            </div>
+          </div>
+          <div class="col-12 col-lg-9 align-self-center d-none d-lg-block">
+            <nav class="d-flex">
+              <ul>
+                <li class="navLink"><a href="#home">Home</a></li>
+                <li class="navLink drop">
+                  <a>Geldanlagen</a>
+                  <div class="down">
+                    <ul>
+                      <li><a href="#termingeld">Termingeld</a></li>
+                      <li><a href="#flexgeld">Flexgeld</a></li>
+                      <li><a href="#kollektiv-pool">Kollektiv-Pool</a></li>
+                      
+                      <li><a href="#etf">ETFs</a></li>
+                      
+                      
+                    </ul>
+                  </div>
+                </li>
+
+                <li class="navLink drop">
+                  <a>Einlagensicherungen</a>
+                  <div class="down">
+                    <ul>
+                      <li>
+                        <a href="#einlagensicherung">EU Einlagensicherung</a>
+                      </li>
+                      <li>
+                        <a href="#freiwilligeeinlagensicherung">Freiwillige Einlagensicherung</a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+
+                <li class="navLink">
+                  <a href="#about">Über Uns</a>
+                </li>
+                <li class="navLink">
+                  <a href="#contact">Kontakt</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="col-12 d-flex d-lg-none justify-content-between align-items-center">
+            <div class="logo">
+              <a href="./#home">
+                <img src="images/logo.png" alt="">
+              </a>
+            </div>
+            <div class="menuIcon">
+              <img src="images/menu.svg" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+<main>
+<div id="home" class="page-section" style="display: block;"><!-- header end -->
+
+    <!-- banner start -->
+
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="banner">
+              <div class="col-12 col-xl-6">
+                <div class="bannerHeading__">
+                  <h1>Ihr Vermögen in sicheren Händen</h1>
+                </div>
+                <div class="bannerPara__">
+                  <p>
+                    Terminzinsanlagen mit maximaler Sicherheit gemäß
+                    EU-Einlagensicherung (EinSig)
+                  </p>
+                </div>
+                <div class="bannerBtn__">
+                  <a href="#contact" class="button">Angebot anfordern</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- banner end -->
+
+    <!-- cards start -->
+
+    
+
+    <!-- cards end -->
+
+    <!-- Gemeinsam start -->
+
+    <section>
+      <div class="container">
+        <div class="row flex-column-reverse flex-lg-row flex-lg-wrap">
+          <div class="col-lg-6 align-self-center">
+            <div class="gemeinsam_sec__">
+              <div class="gemeinsam_sec__UpperText">
+                <p>UNSERE MISSION LAUTET:</p>
+              </div>
+              <div class="gemeinsam_sec__Heading">
+                <h2>GEMEINSAM ZU MEHR ERFOLG</h2>
+              </div>
+              <div class="gemeinsam_sec__ColorText">
+                <span>Ihre Experten für sichere Geldanlagen</span>
+              </div>
+              <div class="gemeinsam_sec__Para">
+                <p>
+                  Expertise und Erfahrung: Profitieren Sie von unserem
+                  fundierten Fachwissen und langjähriger Erfahrung im
+                  Finanzsektor.
+                  <br><br><b>Persönliche Beratung:</b> Maßgeschneiderte
+                  Anlagestrategien, die auf Ihre individuellen Bedürfnisse
+                  abgestimmt sind. <br><br><b>Vielfältige Anlageoptionen:</b>
+                  Ein breites Spektrum an Anlagemöglichkeiten für jeden
+                  Anlegertyp. <br><br><b>Transparenz und Sicherheit:</b>
+                  Klare Informationen und hohe Sicherheitsstandards, unterstützt
+                  durch europäische Einlagensicherung. <br><br><b>Innovation:</b>
+                  Zugang zu fortschrittlichen Finanzprodukten und -technologien.
+                </p>
+              </div>
+              <div class="gemeinsam_sec__Btn">
+                <a href="#about" class="button">Mehr Erfahren</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 align-self-center mb-5 mb-lg-0">
+            <div class="secImg__">
+              <img src="images/section_one.png" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gemeinsam end -->
+
+    <!-- finden start -->
+
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-10 mx-auto">
+            <div class="secContent__">
+              <div class="secContent__UpperText">
+                <span></span>
+              </div>
+              <div class="secContent__Heading">
+                <h2>
+                  Finden Sie die für Sie persönlich lukrativste Anlage auf
+                  einem Blick
+                </h2>
+              </div>
+              <div class="secContent__Para">
+                <p>
+                  Optimieren Sie Ihren persönlichen Vermögensaufbau mit einer
+                  Geldanlage, die Ihrem Anspruch garantiert gerecht wird
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="cardSectionList__">
+              <a href="#termingeld" class="cardSectionList__Item__ cardSectionList__Item__D">
+                <div class="cardSectionList__Item__Heading">
+                  <h3>Garantiezinsanlagen</h3>
+                </div>
+                <div class="cardSectionList__Item__Para">
+                  <p>
+                    Garantierte Zinssätze für sicheres und planbares
+                    Vermögenswachstum.
+                  </p>
+                </div>
+              </a>
+              <a href="#flexgeld" class="cardSectionList__Item__ cardSectionList__Item__D">
+                <div class="cardSectionList__Item__Heading">
+                  <h3>Flexgeld</h3>
+                </div>
+                <div class="cardSectionList__Item__Para">
+                  <p>
+                    Kurzfristig anlegen mit attraktiven Zinsen und voller
+                    Kapitalzugänglichkeit.
+                  </p>
+                </div>
+              </a>
+              <a href="#etf" class="cardSectionList__Item__ cardSectionList__Item__D">
+                <div class="cardSectionList__Item__Heading">
+                  <h3>ETFs</h3>
+                </div>
+                <div class="cardSectionList__Item__Para">
+                  <p>
+                    Portfolio-Diversifikation durch weltweiten Branchen- und
+                    Marktzugang.
+                  </p>
+                </div>
+              </a>
+              <a href="#kollektiv-pool" class="cardSectionList__Item__ cardSectionList__Item__D">
+                <div class="cardSectionList__Item__Heading">
+                  <h3>Kollektiv-Pool</h3>
+                </div>
+                <div class="cardSectionList__Item__Para">
+                  <p>
+                    Erhalten Sie durch die gemeinschaftliche Anlage im Kollektiv-Pool bessere Konditionen.
+                  </p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- finden end -->
+
+    <!-- die vorteile start -->
+
+    <section class="bgColor__">
+      <div class="container">
+        <div class="row flex-column-reverse flex-lg-row flex-lg-wrap">
+          <div class="col-12 col-lg-6 align-self-center increaseWidth">
+            <div class="dieSec__">
+              <div class="dieSec__UpperText">
+                <p>WARUM SOLLTEN SIE IN TERMINGELDANLAGEN INVESTIEREN?</p>
+              </div>
+              <div class="dieSec__Heading">
+                <h2>Die Vorteile von Termingeld:</h2>
+              </div>
+              <div class="dieSec__Para">
+                <p>
+                  <b>Sicherheit und Planbarkeit:</b> Termingeldanlagen bieten eine
+                  sichere und vorhersehbare Rendite. Im Gegensatz zu volatilen
+                  Anlageformen wie Aktien, bleibt Ihr Kapital geschützt und Sie
+                  profitieren von terminen Zinserträgen über die gesamte Laufzeit.
+
+                  <br><br><b>Attraktive Konditionen durch starke Partnerschaften:</b>
+                  Wir arbeiten eng mit renommierten Partnerbanken zusammen, um
+                  Ihnen exklusive Termingeldangebote zu präsentieren. Durch diese
+                  Kooperationen sind wir in der Lage, Sonderkonditionen zu
+                  erhalten, die wir direkt an Sie weitergeben.
+
+                  <br><br><b>Maßgeschneiderte Anlagelösungen: </b>Abhängig
+                  von Ihren finanziellen Zielen und dem gewünschten
+                  Anlagezeitraum bieten wir Ihnen maßgeschneiderte
+                  Termingeldanlagen. Ob kurz-, mittel- oder langfristig – wir
+                  finden das passende Angebot für Sie.
+
+                  <br><br><b>Einfache und transparente Abwicklung: </b>Die
+                  Investition in Termingeld bei uns ist einfach und transparent.
+                  Wir bieten eine klare Übersicht über die Konditionen und
+                  unterstützen Sie bei jedem Schritt des Anlageprozesses.
+
+                  <br><br>Investieren Sie in Termingeldanlagen, um von
+                  sicheren und attraktiven Renditen zu profitieren, gestützt
+                  durch die Expertise und die exklusiven Konditionen unserer
+                  Partnerbanken.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6 align-self-stretch mb-5 mb-lg-0">
+            <div class="dieSec__img">
+              <img src="images/section_two.jpg" class="d-block d-lg-none" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- die vorteile end -->
+
+    <!-- FREE QUOTE start -->
+
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="freeQuoteSec__ freeQuoteSec__Responsive">
+              <div class="freeQuoteSec__Img__ mb-5">
+                <img src="images/section_three.png" alt="">
+              </div>
+              <div class="freeQuoteSec__Content__">
+                <div class="freeQuoteSec__Content__UpperText">
+                  <span>FREE QUOTE</span>
+                </div>
+                <div class="freeQuoteSec__Content__Heading">
+                  <h2>
+                    Berechnen auch Sie mit unserem Zinsrechner,<br>wie sich Ihre
+                    Geldanlage vermehrt
+                  </h2>
+                </div>
+                <div class="freeQuoteSec__Content__List">
+                  <ul>
+                    <li>Überdurchschnittlich hohe Renditen </li>
+                    <li>Kostenloses und unverbindliches Angebot</li>
+                    <li>
+                      EU - Einlagensicherung bis 100.000 Euro, gemäß europ.
+                      Einlagensicherungsgesetz (EinSig)
+                    </li>
+                    <li>
+                      Vertraglich vereinbarte Zinssätze sind verbindlich und
+                      werden durch marktbedingte Schwankungen in keiner weise
+                      beeinträchtigt
+                    </li>
+                    <li>Garantierte Top-Zinsen bei europ. Großbanken </li>
+                    <li>
+                      Kostenfreie Kundenberatung und Kontoführung, ohne jegliche
+                      Bearbeitungsgebühren
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FREE QUOTE end -->
+
+    <!-- section cal start -->
+
+   
+
+    <!-- section cal end -->
+
+    <!-- lander start -->
+
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="bg_color__">
+              <div class="bg_color__Item">
+                <div class="bg_color__Item_Content">
+                  <div class="bg_color__Item_Content_Icon">
+                    <img src="images/l%C3%A4nder.svg" class="svg" alt="">
+                  </div>
+                  <div class="bg_color__Item_Content_Text">
+                    <h3><span class="odometer" data-count="26">0</span>+</h3>
+                  </div>
+                </div>
+                <div class="bg_color__Item_Heading">
+                  <h2>Länder</h2>
+                </div>
+              </div>
+              <div class="bg_color__Item">
+                <div class="bg_color__Item_Content">
+                  <div class="bg_color__Item_Content_Icon">
+                    <img src="images/sparer.svg" class="svg" alt="">
+                  </div>
+                  <div class="bg_color__Item_Content_Text">
+                    <h3>
+                      <span class="odometer" data-count="18.6">0.0</span> tsd. +
+                    </h3>
+                  </div>
+                </div>
+                <div class="bg_color__Item_Heading">
+                  <h2>Sparer</h2>
+                </div>
+              </div>
+              <div class="bg_color__Item">
+                <div class="bg_color__Item_Content">
+                  <div class="bg_color__Item_Content_Icon">
+                    <img src="images/einlagen.svg" class="svg" alt="">
+                  </div>
+                  <div class="bg_color__Item_Content_Text">
+                    <h3>
+                      <span class="odometer" data-count="245">0</span> €mio. +
+                    </h3>
+                  </div>
+                </div>
+                <div class="bg_color__Item_Heading">
+                  <h2>Einlagen</h2>
+                </div>
+              </div>
+              <div class="bg_color__Item">
+                <div class="bg_color__Item_Content">
+                  <div class="bg_color__Item_Content_Icon">
+                    <img src="images/banken.svg" class="svg" alt="">
+                  </div>
+                  <div class="bg_color__Item_Content_Text">
+                    <h3><span class="odometer" data-count="62">0</span>+</h3>
+                  </div>
+                </div>
+                <div class="bg_color__Item_Heading">
+                  <h2>Banken</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- lander end -->
+
+    <!-- UNSERE KUNDEN start -->
+
+    <section>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-10">
+            <div class="secContent__">
+              <div class="secContent__UpperText">
+                <span>UNSERE KUNDEN</span>
+              </div>
+              <div class="secContent__Heading">
+                <h2>Sprechen doch auch Sie uns Ihr Vertrauen aus</h2>
+              </div>
+              <div class="secContent__Para">
+                <p>
+                  Unsere Dienstleistung und die Zufriedenheit unserer Kunden
+                  stehen bei uns an erster Stelle. <br>Seien auch Sie Teil der ABC Capital Corporation-Familie
+                </p>
+              </div>
+            </div>
+          </div>
+    
+			<div class="col-md-11 px-2">
+				
+				
+	
+				
+				
+           
+			<div class="swiper reviewSlider">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <div class="reviewCard__">
+                    <div class="reviewCard__Content">
+                      <div class="reviewCard__Content_img">
+                        <img src="images/img_55.jpg" alt="">
+                      </div>
+                      <div class="reviewCard__Content_Detail">
+                        <div class="reviewCard__Content_Detail_Star">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                        </div>
+                        <div class="reviewCard__Content_Detail_Name">
+                          <h4>Rolf F.</h4>
+                        </div>
+                        <div class="reviewCard__Content_Detail_Date">
+                          <span>12-03-2022</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="reviewCard__Para">
+                      <p>
+                        <span>“</span>Ich bin sehr zufrieden mit meiner Anlage über ABC Capital Corporation. Professionell, transparent und kundenorientiert. Genau so stelle ich mir eine moderne Geldanlage vor.<span>”</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+				 <div class="swiper-slide">
+                  <div class="reviewCard__">
+                    <div class="reviewCard__Content">
+                      <div class="reviewCard__Content_img">
+                        <img src="images/img_54.jpg" alt="">
+                      </div>
+                      <div class="reviewCard__Content_Detail">
+                        <div class="reviewCard__Content_Detail_Star">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                        </div>
+                        <div class="reviewCard__Content_Detail_Name">
+                          <h4>Simone K.</h4>
+                        </div>
+                        <div class="reviewCard__Content_Detail_Date">
+                          <span>07-01-2023</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="reviewCard__Para">
+                      <p>
+                        <span>“</span>Bin schon 3 Jahre Kunde. Alles hat reibungslos geklappt..<span>”</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+				  <div class="swiper-slide">
+                  <div class="reviewCard__">
+                    <div class="reviewCard__Content">
+                      <div class="reviewCard__Content_img">
+                        <img src="images/img_52.jpg" alt="">
+                      </div>
+                      <div class="reviewCard__Content_Detail">
+                        <div class="reviewCard__Content_Detail_Star">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                        </div>
+                        <div class="reviewCard__Content_Detail_Name">
+                          <h4>Heinz H.</h4>
+                        </div>
+                        <div class="reviewCard__Content_Detail_Date">
+                          <span>16-03-2024</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="reviewCard__Para">
+                      <p>
+                        <span>“</span>Auch in meinem dritten Jahr bei ABC Capital Corporation, alles zu meiner Zufriedenheit.<span>”</span>
+                      </p>
+                    </div>
+                  </div>
+					  
+                </div>
+				   <div class="swiper-slide">
+                  <div class="reviewCard__">
+                    <div class="reviewCard__Content">
+                      <div class="reviewCard__Content_img">
+                        <img src="images/img_51.jpg" alt="">
+                      </div>
+                      <div class="reviewCard__Content_Detail">
+                        <div class="reviewCard__Content_Detail_Star">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                        </div>
+                        <div class="reviewCard__Content_Detail_Name">
+                          <h4>Ingolf H.</h4>
+                        </div>
+                        <div class="reviewCard__Content_Detail_Date">
+                          <span>19-03-2024</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="reviewCard__Para">
+                      <p>
+                        <span>“</span>Bin Sehr zufrieden.<span>”</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+				  <div class="swiper-slide">
+                  <div class="reviewCard__">
+                    <div class="reviewCard__Content">
+                      <div class="reviewCard__Content_img">
+                        <img src="images/img_53.jpg" alt="">
+                      </div>
+                      <div class="reviewCard__Content_Detail">
+                        <div class="reviewCard__Content_Detail_Star">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                        </div>
+                        <div class="reviewCard__Content_Detail_Name">
+                          <h4>Marco S.</h4>
+                        </div>
+                        <div class="reviewCard__Content_Detail_Date">
+                          <span>08-03-2024</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="reviewCard__Para">
+                      <p>
+                        <span>“</span>Vielen Dank. Die Auszahlung hat super geklappt.<span>”</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+				  <div class="swiper-slide">
+                  <div class="reviewCard__">
+                    <div class="reviewCard__Content">
+                      <div class="reviewCard__Content_img">
+                        <img src="images/img_1.jpg" alt="">
+                      </div>
+                      <div class="reviewCard__Content_Detail">
+                        <div class="reviewCard__Content_Detail_Star">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                        </div>
+                        <div class="reviewCard__Content_Detail_Name">
+                          <h4>Dietrich R.</h4>
+                        </div>
+                        <div class="reviewCard__Content_Detail_Date">
+                          <span>18-12-2021</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="reviewCard__Para">
+                      <p>
+                        <span>“</span>Ich bin seit über einem Jahr Kunde bei
+                        ABC Capital Corporation und absolut zufrieden mit den
+                        Termingeldkonditionen. Die Zinsen sind top,
+                        und der Kundenservice ist immer hilfsbereit und
+                        kompetent. Definitiv eine Empfehlung wert!<span>”</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+           
+                
+                <div class="swiper-slide">
+                  <div class="reviewCard__">
+                    <div class="reviewCard__Content">
+                      <div class="reviewCard__Content_img">
+                        <img src="images/img_11.jpg" alt="">
+                      </div>
+                      <div class="reviewCard__Content_Detail">
+                        <div class="reviewCard__Content_Detail_Star">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                        </div>
+                        <div class="reviewCard__Content_Detail_Name">
+                          <h4>Oliver S.</h4>
+                        </div>
+                        <div class="reviewCard__Content_Detail_Date">
+                          <span>25-08-2022</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="reviewCard__Para">
+                      <p>
+                        <span>“</span>Hervorragender Service und erstklassige
+                        Beratung bei ABC Capital Corporation. Mein Berater
+                        hat mir die Vorteile von Termingeld anschaulich erklärt
+                        und eine Lösung maßgeschneidert für meine Bedürfnisse
+                        gefunden.<span>”</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                
+
+               
+
+               
+
+            
+
+                <div class="swiper-slide">
+                  <div class="reviewCard__">
+                    <div class="reviewCard__Content">
+                      <div class="reviewCard__Content_img">
+                        <img src="images/img_13.jpg" alt="">
+                      </div>
+                      <div class="reviewCard__Content_Detail">
+                        <div class="reviewCard__Content_Detail_Star">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                        </div>
+                        <div class="reviewCard__Content_Detail_Name">
+                          <h4>Julia E.</h4>
+                        </div>
+                        <div class="reviewCard__Content_Detail_Date">
+                          <span>17-09-2023</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="reviewCard__Para">
+                      <p>
+                        <span>“</span>ABC Capital Corporation hat mich mit
+                        ihrem persönlichen Kundenservice und den
+                        maßgeschneiderten Angeboten für Termingeld überzeugt. Ich
+                        fühle mich als Kunde wertgeschätzt und gut
+                        aufgehoben.<span>”</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                
+
+               
+
+                
+
+               
+
+              
+
+              
+
+             
+
+              
+
+                <div class="swiper-slide">
+                  <div class="reviewCard__">
+                    <div class="reviewCard__Content">
+                      <div class="reviewCard__Content_img">
+                        <img src="images/img_23.jpg" alt="">
+                      </div>
+                      <div class="reviewCard__Content_Detail">
+                        <div class="reviewCard__Content_Detail_Star">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                          <img src="images/star.svg" class="svg" alt="">
+                        </div>
+                        <div class="reviewCard__Content_Detail_Name">
+                          <h4>Thomas M.</h4>
+                        </div>
+                        <div class="reviewCard__Content_Detail_Date">
+                          <span>21-02-2024</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="reviewCard__Para">
+                      <p>
+                        <span>“</span>Ich habe vor kurzem über ABC Capital Corporation
+                        Advisors AG in Termingeld investiert und bin bisher
+                        zufrieden. Die Konditionen sind fair, und der
+                        Anlageprozess war einfach und unkompliziert. Der
+                        Kundenservice hat auf meine Fragen schnell und kompetent
+                        geantwortet. Ich erwarte eine solide Rendite und freue
+                        mich darauf zu sehen, wie sich meine Investition
+                        entwickelt.<span>”</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+             
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNSERE KUNDEN end -->
+    <!-- ipos slider start -->
+
+    <section>
+     
+    </section>
+
+    <!-- ipos slider end -->
+    <!-- haben start -->
+
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="habenSec__">
+              <div class="habenSec__UpperText">
+                <span></span>
+              </div>
+              <div class="habenSec__Heading">
+                <h3>
+                  Haben wir auch Ihr Interesse an einem persönlichen Angebot
+                  geweckt?
+                </h3>
+              </div>
+              <div class="habenSec__Para">
+                <p>
+                  Unsere Dienstleistung und die Zufriedenheit unserer Kunden
+                  stehen bei uns an erster Stelle. <br>Seien auch Sie Teil der ABC Capital Corporation-Familie
+                </p>
+              </div>
+              <div class="habenSec__Btn">
+                <a href="#contact" class="button">
+                  Angebot anfordern
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- haben end -->
+
+    <!-- footer start --></div>
+<div id="termingeld" class="page-section" style="display: none;"><!-- header end --><!-- header end --><!-- banner start -->
+
+<section>
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<div class="banner fest_Banner">
+<div class="col-md-6">
+<div class="bannerHeading__ mb-0">
+<h1>Termingeld</h1>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- banner end --><!-- Gemeinsam start -->
+
+<section>
+<div class="container">
+<div class="row justify-content-center">
+<div class="col-md-10">
+<div class="secContent__">
+<div class="secContent__UpperText"><span></span></div>
+
+<div class="secContent__Heading">
+<h2>Termingeldanlagen gehören zu den sichersten und beliebtesten Formen der Geldanlage</h2>
+</div>
+
+<div class="secContent__Para">
+<p>Sicherheit und Beliebtheit gehen Hand in Hand, wenn es um Geldanlagen geht. Termingeldanlagen sind eine verlässliche Möglichkeit, Ihr Kapital zu schützen und zu vermehren. Bei dieser bewährten Anlageform legen Sie Ihr Geld für einen termingelegten Zeitraum zu einem festen Zinssatz an. Wir sind stolz darauf, Ihnen die besten Banken mit exklusiven Sonderkonditionen für Termingeldanlagen vorstellen zu können. Unsere sorgfältige Recherche hat eine Auswahl an erstklassigen Finanzinstituten ergeben, die Ihnen attraktive Zinssätze, flexible Laufzeiten und zusätzliche Vorteile bieten. Ihre finanzielle Sicherheit liegt uns am Herzen, und wir möchten Ihnen dabei helfen, Ihre Anlageziele zu erreichen. Mit unseren Empfehlungen können Sie in eine Zukunft investieren, die auf soliden finanziellen Grundlagen steht. Entdecken Sie die Vorteile von Termingeldanlagen und die besten Banken, die Ihnen Sonderkonditionen bieten. Ihre finanzielle Stabilität beginnt hier.</p>
+</div>
+</div>
+</div>
+
+<div class="col-md-12">
+<div class="cardSectionList__">
+<div class="cardSectionList__Item__">
+<div class="cardSectionList__Item__Icon"><img alt="" class="svg" src="images/hand.svg"></div>
+
+<div class="cardSectionList__Item__Heading">
+<h3>Angebot</h3>
+</div>
+
+<div class="cardSectionList__Item__Para">
+<p>Erhalten Sie ein maßgeschneidertes Angebot, das genau auf Ihre Anforderungen
+zugeschnitten ist.</p>
+</div>
+</div>
+
+<div class="cardSectionList__Item__">
+<div class="cardSectionList__Item__Icon"><img alt="" class="svg" src="images/invoice.svg"></div>
+
+<div class="cardSectionList__Item__Heading">
+<h3>Legitimation</h3>
+</div>
+
+<div class="cardSectionList__Item__Para">
+<p>Ihre Identifikation wird zuverlässig und geschützt durch ein verschlüsseltes
+elektronisches Verfahren durchgeführt.</p>
+</div>
+</div>
+
+<div class="cardSectionList__Item__">
+<div class="cardSectionList__Item__Icon"><img alt="" class="svg" src="images/home.svg"></div>
+
+<div class="cardSectionList__Item__Heading">
+<h3>Online-Abwicklung</h3>
+</div>
+
+<div class="cardSectionList__Item__Para">
+<p>Der komplette Anlagevorgang erfolgt einfach, schnell und bequem über unser
+sicheres Onlineverfahren.</p>
+</div>
+</div>
+
+<div class="cardSectionList__Item__">
+<div class="cardSectionList__Item__Icon"><img alt="" class="svg" src="images/doller_coin.svg"></div>
+
+<div class="cardSectionList__Item__Heading">
+<h3>Anlagekonto</h3>
+</div>
+
+<div class="cardSectionList__Item__Para">
+<p>Ihre Logindaten ermöglichen Ihnen den sicheren und flexiblen Zugang zu Ihrem
+virtuellen Anlagekonto – jederzeit und von überall.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Gemeinsam end --><!-- die vorteile start -->
+
+<section class="bgColor__ fest_bgColor__">
+<div class="container">
+<div class="row flex-column-reverse flex-lg-row flex-lg-wrap">
+<div class="col-12 col-lg-6 align-self-center increaseWidth">
+<div class="dieSec__">
+<div class="dieSec__UpperText">
+<p></p>
+</div>
+
+<div class="dieSec__Heading">
+<h2>Top-Termingeld-Vergleich:</h2>
+</div>
+
+<div class="freeQuoteSec__Content__List fest_freeQuoteSec__Content__List">
+<ul>
+	<li>Aktueller Termingeld-Vergleich mit den besten Konditionen im Überblick</li>
+	<li>Termingeld mit nur einem Konto bei verschiedenen Banken anlegen</li>
+	<li>Keine Gebühren für die Kontoeröffnung und Kontoführung</li>
+	<li>Einfache und bequeme Online-Abwicklung</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="col-12 col-lg-6 align-self-stretch mb-5 mb-lg-0">
+<div class="dieSec__img"><img alt="" class="d-block d-lg-none" src="images/fest_section_two.jpg"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- die vorteile end --><!-- faq start -->
+
+<section>
+<div class="container">
+<div class="row justify-content-center">
+<div class="col-10">
+<div class="secContent__">
+<div class="secContent__UpperText"><span>WE HELFEN IMMER</span></div>
+
+<div class="secContent__Heading">
+<h2>FAQs</h2>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="faqItem__">
+<div class="faqItem__Header_">
+<div class="faqItem__Header_Heading">
+<h4>Was bedeutet eigentlich Termingeld?</h4>
+</div>
+
+<div class="faqItem__Header_Arrow"><img alt="" class="svg" src="images/arrow_down.svg"></div>
+</div>
+
+<div class="faqItem__Body_">
+<div class="faqItem__Body_Para">
+<p>Termingeld ist eine Form der Geldanlage, bei der Sie einen festen Geldbetrag für einen zuvor
+festgelegten kurz- oder langfristigen Zeitraum (die Laufzeit) anlegen. Während dieser Zeit bleibt Ihr
+Anlagekapital fest gebunden und Sie erhalten dafür einen vereinbarten Zinssatz. Am Ende der
+Laufzeit erhalten Sie Ihr angelegtes Kapital plus die Zinsen zurück.
+Warum Termingeld und Tagesgeld:
+Der wesentliche Unterschied liegt in der Verfügbarkeit und Verzinsung des Geldes:
+Termingeld ist für eine festgelegte Laufzeit gebunden, und Sie können während dieser Zeit
+normalerweise nicht oder nur eingeschränkt auf Ihr Geld zugreifen. Dafür sind die Zinssätze meist
+höher, da die Bank mit Ihrem Geld langfristig planen kann.
+Tagesgeld hingegen ist täglich verfügbar – Sie können jederzeit Geld einzahlen oder abheben.
+Dafür sind die Zinssätze in der Regel niedriger, weil die Bank keine feste Verfügbarkeit des Geldes
+hat.
+Kurz gesagt: Termingeld bietet höhere Zinsen bei weniger Flexibilität, während Tagesgeld 
+maximale Flexibilität bei meist niedrigeren Zinsen bietet.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="faqItem__">
+<div class="faqItem__Header_">
+<div class="faqItem__Header_Heading">
+<h4>Läuft meine Anlage automatisch aus?</h4>
+</div>
+
+<div class="faqItem__Header_Arrow"><img alt="" class="svg" src="images/arrow_down.svg"></div>
+</div>
+
+<div class="faqItem__Body_">
+<div class="faqItem__Body_Para">
+<p>Ja, Ihre Anlage läuft automatisch zum vereinbarten Fälligkeitstermin aus. Da es sich
+um Sonderkontingente handelt, erfolgt keine automatische Verlängerung
+(Prolongation). Etwa zwei Wochen vor Fälligkeit werden Sie von uns kontaktiert, um
+auf Wunsch eine neue Anlage zu vereinbaren.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="faqItem__">
+<div class="faqItem__Header_">
+<div class="faqItem__Header_Heading">
+<h4>Was ist ein Termingeldkonto?</h4>
+</div>
+
+<div class="faqItem__Header_Arrow"><img alt="" class="svg" src="images/arrow_down.svg"></div>
+</div>
+
+<div class="faqItem__Body_">
+<div class="faqItem__Body_Para">
+<p>Bei einem Termingeldkonto tellen Sie der Bank Ihr Kapital für einen von Ihnen mit
+der Bank vereinbarten Zeitraum zur Verfügung. Während dieser Laufzeit wird Ihr
+angelegtes Kapital zu einem festgelegten Zinssatz risikofrei verzinst.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="faqItem__">
+<div class="faqItem__Header_">
+<div class="faqItem__Header_Heading">
+<h4>Kann eine Termingeldanlage vor Fälligkeit aufgelöst werden?</h4>
+</div>
+
+<div class="faqItem__Header_Arrow"><img alt="" class="svg" src="images/arrow_down.svg"></div>
+</div>
+
+<div class="faqItem__Body_">
+<div class="faqItem__Body_Para">
+<p>Nein, eine vorzeitige Auflösung ist nicht möglich. Das Kapital ist für die gesamte
+Laufzeit fest gebunden – dies ist Grundlage für den garantierten Zinssatz. Bitte legen
+Sie daher nur Beträge an, auf die Sie während der Laufzeit verzichten können.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="faqItem__">
+<div class="faqItem__Header_">
+<div class="faqItem__Header_Heading">
+<h4>Muss ich einen Freistellungsauftrag erteilen?</h4>
+</div>
+
+<div class="faqItem__Header_Arrow"><img alt="" class="svg" src="images/arrow_down.svg"></div>
+</div>
+
+<div class="faqItem__Body_">
+<div class="faqItem__Body_Para">
+<p>Ein Freistellungsauftrag ist bei Anlagen im europäischen Ausland in der Regel nicht
+nötig. Sofern Sie keinen Wohnsitz im Land der Geldanlage haben, erfolgt dort meist
+keine Besteuerung. Die Zinserträge müssen jedoch in Ihrem Wohnsitzland versteuert
+werden. Dafür erhalten Sie von der Bank eine Erträgnisaufstellung, die Sie Ihrem
+Finanzamt vorlegen können. Viele europäische Banken gewähren zudem eine
+Quellensteuerbefreiung, wenn kein steuerlicher Wohnsitz im Land besteht.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="faqItem__">
+<div class="faqItem__Header_">
+<div class="faqItem__Header_Heading">
+<h4>Wie hoch ist das Risiko bei Zinsschwankungen?</h4>
+</div>
+
+<div class="faqItem__Header_Arrow"><img alt="" class="svg" src="images/arrow_down.svg"></div>
+</div>
+
+<div class="faqItem__Body_">
+<div class="faqItem__Body_Para">
+<p>Bei Termingeldanlagen besteht kein Risiko durch Zinsschwankungen während der
+Laufzeit, da der Zinssatz bei Vertragsabschluss fest vereinbart wird. Das bedeutet:
+Unabhängig davon, wie sich das allgemeine Zinsniveau entwickelt, bleibt Ihre
+Verzinsung über die gesamte Laufzeit stabil und planbar. Allerdings kann sich ein
+zwischenzeitlich steigendes Zinsniveau auf neue Anlagen auswirken – bestehende
+Termingelder profitieren davon nicht. Um flexibel auf Marktveränderungen zu
+reagieren, empfehlen sich ggf. gestaffelte Laufzeiten (Zinsstaffelung).</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- faq end --><!-- haben start -->
+
+<section>
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<div class="habenSec__">
+<div class="habenSec__UpperText"><span></span></div>
+
+<div class="habenSec__Heading">
+<h3>Haben wir auch Ihr Interesse an einem persönlichen Angebot geweckt?</h3>
+</div>
+
+<div class="habenSec__Btn mt-4"><a class="button" href="contact-us.html">Angebot anfordern </a></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- haben end --><!-- footer start --></div>
+<div id="flexgeld" class="page-section" style="display: none;"><!-- header end --><!-- header end --><!-- banner start -->
+
+<section>
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<div class="banner kund_Banner">
+<div class="col-md-6">
+<div class="bannerHeading__ mb-0">
+<h1>Flexgeld</h1>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- banner end --><!-- Gemeinsam start -->
+
+<section>
+<div class="container">
+<div class="row justify-content-center">
+<div class="col-md-10">
+<div class="secContent__">
+<div class="secContent__UpperText"><span>Flexgeld bei ABC Capital Corporation</span></div>
+
+<div class="secContent__Heading">
+<h2>Flexibilität trifft auf Rendite</h2>
+</div>
+
+<div class="secContent__Para">
+<p>Bei ABC Capital Corporation verstehen wir, dass unsere Kunden nach einer Geldanlage suchen, die sowohl flexible Zugriffsmöglichkeiten als auch attraktive Renditen bietet. Genau hier kommt unser Flexgeld-Angebot ins Spiel, eine innovative Anlageform, die sich perfekt an Ihre individuellen Bedürfnisse anpasst.</p>
+ 
+
+<h3><b>Was ist Flexgeld?</b></h3>
+ 
+
+<p>Flexgeld kombiniert die Vorteile eines Tagesgeldkontos mit denen einer Festgeldanlage. Es bietet Ihnen die Möglichkeit, Ihr Geld kurzfristig anzulegen, ohne auf attraktive Zinserträge verzichten zu müssen. Im Vergleich zu traditionellen Sparbüchern erhalten Sie bei Flexgeld höhere Zinsen, behalten dabei jedoch die Flexibilität, jederzeit auf Ihr Geld zugreifen zu können.</p>
+ 
+
+<h3><b>Warum Flexgeld über ABC Capital Corporation?</b></h3>
+ 
+
+<p>Als Ihr vertrauenswürdiger Finanzpartner bieten wir Ihnen nicht nur attraktive Konditionen für Ihre Flexgeldanlage, sondern auch die Sicherheit und Expertise einer etablierten Finanzinstitution. Mit ABC Capital Corporation entscheiden Sie sich für eine Geldanlage, die sowohl rentabel als auch flexibel ist. Entdecken Sie die Vorteile von Flexgeld bei ABC Capital Corporation und machen Sie den ersten Schritt zu einer smarteren Geldanlage. Kontaktieren Sie uns für weitere Informationen oder um Ihr Flexgeld-Konto noch heute zu eröffnen.</p>
+</div>
+</div>
+</div>
+
+<div class="col-md-12">
+<div class="cardSectionList__">
+<div class="cardSectionList__Item__">
+<div class="cardSectionList__Item__Icon"><img alt="" class="svg" src="images/hand.svg"></div>
+
+<div class="cardSectionList__Item__Heading">
+<h3>Angebot</h3>
+</div>
+
+<div class="cardSectionList__Item__Para">
+<p>Erhalten Sie ein maßgeschneidertes Angebot, das genau auf Ihre Anforderungen
+zugeschnitten ist.</p>
+</div>
+</div>
+
+<div class="cardSectionList__Item__">
+<div class="cardSectionList__Item__Icon"><img alt="" class="svg" src="images/invoice.svg"></div>
+
+<div class="cardSectionList__Item__Heading">
+<h3>Legitimation</h3>
+</div>
+
+<div class="cardSectionList__Item__Para">
+<p>Ihre Identifikation wird zuverlässig und geschützt durch ein verschlüsseltes
+elektronisches Verfahren durchgeführt.</p>
+</div>
+</div>
+
+<div class="cardSectionList__Item__">
+<div class="cardSectionList__Item__Icon"><img alt="" class="svg" src="images/home.svg"></div>
+
+<div class="cardSectionList__Item__Heading">
+<h3>Online-Abwicklung</h3>
+</div>
+
+<div class="cardSectionList__Item__Para">
+<p>Der komplette Anlagevorgang erfolgt einfach, schnell und bequem über unser
+sicheres Onlineverfahren.</p>
+</div>
+</div>
+
+<div class="cardSectionList__Item__">
+<div class="cardSectionList__Item__Icon"><img alt="" class="svg" src="images/doller_coin.svg"></div>
+
+<div class="cardSectionList__Item__Heading">
+<h3>Anlagekonto</h3>
+</div>
+
+<div class="cardSectionList__Item__Para">
+<p>Ihre Logindaten ermöglichen Ihnen den sicheren und flexiblen Zugang zu Ihrem
+virtuellen Anlagekonto – jederzeit und von überall.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Gemeinsam end --><!-- die vorteile start -->
+
+<section class="bgColor__ kundig_bgColor__">
+<div class="container">
+<div class="row flex-column-reverse flex-lg-row flex-lg-wrap">
+<div class="col-12 col-lg-6 align-self-center increaseWidth">
+<div class="dieSec__">
+<div class="dieSec__UpperText">
+<p>FLEXGELD VORTEILE</p>
+</div>
+
+<div class="dieSec__Heading">
+<h2>Ihre Vorteile auf einen Blick:</h2>
+</div>
+
+<div class="freeQuoteSec__Content__List fest_freeQuoteSec__Content__List">
+<ul>
+	<li>Höhere Zinsen als bei Standard-Sparformen: Flexgeld bietet in der Regel höhere Zinssätze im Vergleich zu herkömmlichen Sparbüchern oder Tagesgeldkonten, was zu einer attraktiveren Rendite für Ihre Einlagen führt.</li>
+	<li>Flexibler Zugriff auf Ihr Geld: Einer der größten Vorteile von Flexgeld ist die Flexibilität. Sie haben jederzeit Zugang zu Ihrem Geld, ohne lange Wartezeiten oder Strafgebühren für vorzeitige Abhebungen, wie es oft bei traditionellen Festgeldkonten der Fall ist.</li>
+	<li>Keine langfristige Bindung: Im Gegensatz zu vielen anderen Anlageformen, die eine feste Laufzeit haben, ermöglicht Flexgeld eine kurzfristige Anlage Ihres Kapitals. Dies ist ideal für Anleger, die nicht ihr Geld für lange Zeiträume binden möchten.</li>
+	<li>Sicherheit durch Einlagensicherung: Wie bei anderen Bankprodukten sind auch bei Flexgeld Ihre Einlagen bis zu einem bestimmten Betrag durch die europäische Einlagensicherung geschützt. Dies bietet Ihnen zusätzliche Sicherheit für Ihr investiertes Kapital.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="col-12 col-lg-6 align-self-stretch mb-5 mb-lg-0">
+<div class="dieSec__img"><img alt="" class="d-block d-lg-none" src="images/kundigungsgeld_section_two.jpg"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- die vorteile end --><!-- haben start -->
+
+<section>
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<div class="habenSec__">
+<div class="col-md-12">
+<div>
+<div class="habenSec__Heading profitierenSec__Heading impressum_content_Break_Word">
+<h3>Top Festzinsanlagen für Ihren Vermögenszuwachs</h3>
+</div>
+
+<div class="habenSec__Para profitierenSec__Para">
+<p>Mit festen Zinsen, überschaubaren Laufzeiten und besten Sicherheiten bieten diese Festzinsanlagen das optimale Fundament für Ihren Vermögensaufbau. Sie entscheiden, ob Sie Ihre Zinsauszahlungen halbjährlich, jährlich oder endfällig erhalten möchten.</p>
+</div>
+
+<div class="habenSec__Btn"><a class="button" href="./contact-us.html">Angebot anfordern </a></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- haben end --><!-- faq start -->
+
+<section>
+<div class="container">
+<div class="row justify-content-center">
+<div class="col-10">
+<div class="secContent__">
+<div class="secContent__UpperText"><span>WE HELFEN IMMER</span></div>
+
+<div class="secContent__Heading">
+<h2>FAQs</h2>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="faqItem__">
+<div class="faqItem__Header_">
+<div class="faqItem__Header_Heading">
+<h4>Was ist Flexgeld?</h4>
+</div>
+
+<div class="faqItem__Header_Arrow"><img alt="" class="svg" src="images/arrow_down.svg"></div>
+</div>
+
+<div class="faqItem__Body_">
+<div class="faqItem__Body_Para">
+<p>Flexgeld ist eine Anlageform, die die Vorteile von Tages- und Festgeldkonten kombiniert. Es ermöglicht Ihnen, Ihr Geld kurzfristig anzulegen und dabei von höheren Zinsen zu profitieren, während Sie gleichzeitig täglichen Zugriff auf Ihr Kapital haben.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="faqItem__">
+<div class="faqItem__Header_">
+<div class="faqItem__Header_Heading">
+<h4>Wie unterscheidet sich Flexgeld von einem Tagesgeldkonto?</h4>
+</div>
+
+<div class="faqItem__Header_Arrow"><img alt="" class="svg" src="images/arrow_down.svg"></div>
+</div>
+
+<div class="faqItem__Body_">
+<div class="faqItem__Body_Para">
+<p>Der Hauptunterschied liegt in den Zinsen. Flexgeld bietet in der Regel höhere Zinsen als ein Tagesgeldkonto. Allerdings kann es sein, dass Flexgeldkonten bestimmte Bedingungen für den Zugriff auf das Geld oder die Zinszahlungen haben.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="faqItem__">
+<div class="faqItem__Header_">
+<div class="faqItem__Header_Heading">
+<h4>Ist mein Geld bei einer Flexgeldanlage sicher?</h4>
+</div>
+
+<div class="faqItem__Header_Arrow"><img alt="" class="svg" src="images/arrow_down.svg"></div>
+</div>
+
+<div class="faqItem__Body_">
+<div class="faqItem__Body_Para">
+<p>Ja, wie bei anderen Bankprodukten sind auch Einlagen in Flexgeld bis zu einem bestimmten Betrag durch die europäische Einlagensicherung geschützt. Dies bietet Ihnen finanzielle Sicherheit für Ihr investiertes Kapital.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="faqItem__">
+<div class="faqItem__Header_">
+<div class="faqItem__Header_Heading">
+<h4>Kann ich jederzeit über mein Flexgeld verfügen?</h4>
+</div>
+
+<div class="faqItem__Header_Arrow"><img alt="" class="svg" src="images/arrow_down.svg"></div>
+</div>
+
+<div class="faqItem__Body_">
+<div class="faqItem__Body_Para">
+<p>Ja, ein großer Vorteil von Flexgeld ist die Flexibilität. Sie können jederzeit auf Ihr Geld zugreifen, ohne Strafgebühren für vorzeitige Abhebungen befürchten zu müssen.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="faqItem__">
+<div class="faqItem__Header_">
+<div class="faqItem__Header_Heading">
+<h4>Für wen ist Flexgeld geeignet?</h4>
+</div>
+
+<div class="faqItem__Header_Arrow"><img alt="" class="svg" src="images/arrow_down.svg"></div>
+</div>
+
+<div class="faqItem__Body_">
+<div class="faqItem__Body_Para">
+<p>Flexgeld ist ideal für Anleger, die eine höhere Rendite als bei einem traditionellen Sparbuch suchen, aber gleichzeitig flexiblen Zugriff auf ihr Geld benötigen. Es eignet sich besonders gut für kurz- bis mittelfristige Anlageziele.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="faqItem__">
+<div class="faqItem__Header_">
+<div class="faqItem__Header_Heading">
+<h4>Wie eröffne ich ein Flexgeldkonto?</h4>
+</div>
+
+<div class="faqItem__Header_Arrow"><img alt="" class="svg" src="images/arrow_down.svg"></div>
+</div>
+
+<div class="faqItem__Body_">
+<div class="faqItem__Body_Para">
+<p>Die Eröffnung eines Flexgeldkontos erfolgt in der Regel einfach und unkompliziert. Kontaktieren Sie uns für weitere Informationen und wir führen Sie durch den Prozess der Kontoeröffnung und erklären Ihnen alle Schritte und Bedingungen.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- faq end --><!-- haben start -->
+
+<section>
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<div class="habenSec__">
+<div class="habenSec__UpperText"><span></span></div>
+
+<div class="habenSec__Heading">
+<h3>Haben wir auch Ihr Interesse an einem persönlichen Angebot geweckt?</h3>
+</div>
+
+<div class="habenSec__Btn mt-4"><a class="button" href="contact-us.html">Angebot anfordern </a></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- haben end --><!-- footer start --></div>
+<div id="kollektiv-pool" class="page-section" style="display: none;"><!-- header end --><!-- header end --><!-- banner start -->
+
+<section>
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<div class="banner fest_Banner">
+<div class="col-md-6">
+<div class="bannerHeading__ mb-0">
+<h1>Kollektiv-Poolanlage</h1>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- banner end --><!-- Gemeinsam start -->
+
+<section>
+<div class="container">
+<div class="row justify-content-center">
+<div class="col-md-10">
+<div class="secContent__">
+<div class="secContent__UpperText"><span></span></div>
+
+<div class="secContent__Heading">
+<h2>Kollektiv-Poolanlage bei ABC Capital Corporation
+Gemeinsam investieren – effizient profitieren</h2>
+</div>
+
+<div class="secContent__Para">
+<p>Bei ABC Capital Corporation wissen wir, dass viele unserer Kunden nach einer Anlageform suchen, die es
+ermöglicht, gemeinsam mit anderen zu investieren und dabei von professioneller Verwaltung sowie
+attraktiven Renditen zu profitieren. Genau hier setzt unsere Kollektiv-Poolanlage an – eine
+innovative Lösung, die Ihre Investitionen bündelt und optimal auf Ihre Bedürfnisse abstimmt.
+Was ist eine Kollektiv-Poolanlage?
+Die Kollektiv-Poolanlage vereint die Gelder mehrerer Anleger in einem gemeinsamen Anlagepool,
+der professionell verwaltet wird. So profitieren Sie von einer breiten Diversifikation, und einer
+effizienten Verwaltung, ohne selbst aktiv investieren zu müssen. Durch die Bündelung der Mittel
+können höhere Renditechancen genutzt werden, während Sie gleichzeitig von mehr Flexibilität und
+geringeren Einstiegshürden profitieren.
+Warum eine Kollektiv-Poolanlage bei ABC Capital Corporation?
+Als Ihr verlässlicher Finanzpartner bieten wir Ihnen nicht nur attraktive Konditionen für Ihre
+Beteiligung am Anlagepool, sondern auch die Sicherheit und Erfahrung einer etablierten
+Finanzinstitution. Mit ABC Capital Corporation investieren Sie gemeinsam und profitieren von professionellem
+Management, transparenter Verwaltung und einer optimalen Kombination aus Rendite und Risiko.
+Entdecken Sie die Vorteile unserer Kollektiv-Poolanlage und starten Sie noch heute in eine
+nachhaltige und smarte Investmentstrategie. Kontaktieren Sie uns für weitere Informationen oder
+um Ihre Beteiligung zu vereinbaren.</p>
+</div>
+</div>
+</div>
+
+<div class="col-md-12">
+<div class="cardSectionList__">
+<div class="cardSectionList__Item__">
+<div class="cardSectionList__Item__Icon"><img alt="" class="svg" src="images/hand.svg"></div>
+
+<div class="cardSectionList__Item__Heading">
+<h3>Angebot</h3>
+</div>
+
+<div class="cardSectionList__Item__Para">
+<p>Erhalten Sie ein maßgeschneidertes Angebot, das genau auf Ihre Anforderungen
+zugeschnitten ist.</p>
+</div>
+</div>
+
+<div class="cardSectionList__Item__">
+<div class="cardSectionList__Item__Icon"><img alt="" class="svg" src="images/invoice.svg"></div>
+
+<div class="cardSectionList__Item__Heading">
+<h3>Legitimation</h3>
+</div>
+
+<div class="cardSectionList__Item__Para">
+<p>Ihre Identifikation wird zuverlässig und geschützt durch ein verschlüsseltes
+elektronisches Verfahren durchgeführt.</p>
+</div>
+</div>
+
+<div class="cardSectionList__Item__">
+<div class="cardSectionList__Item__Icon"><img alt="" class="svg" src="images/home.svg"></div>
+
+<div class="cardSectionList__Item__Heading">
+<h3>Online-Abwicklung</h3>
+</div>
+
+<div class="cardSectionList__Item__Para">
+<p>Der komplette Anlagevorgang erfolgt einfach, schnell und bequem über unser
+sicheres Onlineverfahren.</p>
+</div>
+</div>
+
+<div class="cardSectionList__Item__">
+<div class="cardSectionList__Item__Icon"><img alt="" class="svg" src="images/doller_coin.svg"></div>
+
+<div class="cardSectionList__Item__Heading">
+<h3>Anlagekonto</h3>
+</div>
+
+<div class="cardSectionList__Item__Para">
+<p>Ihre Logindaten ermöglichen Ihnen den sicheren und flexiblen Zugang zu Ihrem
+virtuellen Anlagekonto – jederzeit und von überall.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Gemeinsam end --><!-- die vorteile start -->
+
+<section class="bgColor__ fest_bgColor__">
+<div class="container">
+<div class="row flex-column-reverse flex-lg-row flex-lg-wrap">
+<div class="col-12 col-lg-6 align-self-center increaseWidth">
+<div class="dieSec__">
+<div class="dieSec__UpperText">
+<p>Kollektiv-Pool</p>
+</div>
+
+<div class="dieSec__Heading">
+<h2>Ihre Vorteile auf einen Blick:</h2>
+</div>
+
+<div class="freeQuoteSec__Content__List fest_freeQuoteSec__Content__List">
+<ul>
+	<li>Professionelles Management und Diversifikation: Durch die Bündelung der Gelder mehrerer
+Anleger entsteht ein hohes Anlagevolumen, das eine breit gestreute und professionelle
+Verwaltung ermöglicht. Dadurch können attraktive Renditechancen geschaffen werden, von
+denen jeder Anleger profitieren kann.</li>
+	<li>Effizienter Zugang zu Märkten: Als Teil eines Anlagepools profitieren Sie von besseren
+Konditionen und Zugang zu Anlageklassen, die für Einzelanleger oft schwer zugänglich
+sind.</li>
+	<li>Sicherheit durch etablierte Strukturen: Ihre Beteiligung unterliegt klaren rechtlichen
+Rahmenbedingungen und wird durch die Erfahrung und Transparenz einer etablierten
+Finanzinstitution unterstützt.</li>
+	
+</ul>
+</div>
+</div>
+</div>
+
+<div class="col-12 col-lg-6 align-self-stretch mb-5 mb-lg-0">
+<div class="dieSec__img"><img alt="" class="d-block d-lg-none" src="images/fest_section_two.jpg"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- die vorteile end --><!-- faq start -->
+
+<section>
+<div class="container">
+<div class="row justify-content-center">
+<div class="col-10">
+<div class="secContent__">
+<div class="secContent__UpperText"><span>WE HELFEN IMMER</span></div>
+
+<div class="secContent__Heading">
+<h2>FAQs</h2>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="faqItem__">
+<div class="faqItem__Header_">
+<div class="faqItem__Header_Heading">
+<h4>Was ist ein Kollektiv-Pool?</h4>
+</div>
+
+<div class="faqItem__Header_Arrow"><img alt="" class="svg" src="images/arrow_down.svg"></div>
+</div>
+
+<div class="faqItem__Body_">
+<div class="faqItem__Body_Para">
+<p>Ein Kollektiv-Pool ist eine Anlageform, bei der die Gelder mehrerer Anleger zusammengelegt und
+gemeinsam investiert werden. Durch dieses gebündelte Kapital entsteht ein größeres
+Anlagevolumen, das professionell verwaltet wird. So profitieren die Anleger von einer breiten
+Diversifikation, effizientem Management und besseren Renditechancen, als es bei Einzelanlagen oft
+möglich ist.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="faqItem__">
+<div class="faqItem__Header_">
+<div class="faqItem__Header_Heading">
+<h4>Kann ich vorzeitig aussteigen oder mein Kapital zurückziehen?</h4>
+</div>
+
+<div class="faqItem__Header_Arrow"><img alt="" class="svg" src="images/arrow_down.svg"></div>
+</div>
+
+<div class="faqItem__Body_">
+<div class="faqItem__Body_Para">
+<p>Da es sich bei der Kollektiv-Poolanlage um eine fest vereinbarte Termineinlage handelt, ist ein
+vorzeitiger Ausstieg oder eine Rückzahlung des Kapitals vor Ablauf der vereinbarten Laufzeit nicht
+möglich.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="faqItem__">
+<div class="faqItem__Header_">
+<div class="faqItem__Header_Heading">
+<h4>Ist mein Geld in einem Kollektiv-Pool sicher?</h4>
+</div>
+
+<div class="faqItem__Header_Arrow"><img alt="" class="svg" src="images/arrow_down.svg"></div>
+</div>
+
+<div class="faqItem__Body_">
+<div class="faqItem__Body_Para">
+<p>Ja, Ihr Kapital in der Kollektiv-Poolanlage ist sicher, da es sich um eine festverzinsliche
+Termineinlage handelt. Ihr Geld ist über die gesamte Laufzeit fest angelegt und die Verzinsung ist
+garantiert. Somit unterliegt die Anlage keinerlei Schwankungs- oder Marktrisiken. Die Anlage
+unterliegt zu dem auch den gesetzlichen Vorgaben der Einlagensicherung.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="faqItem__">
+<div class="faqItem__Header_">
+<div class="faqItem__Header_Heading">
+<h4>Wie funktioniert die Teilnahme am Kollektiv-Pool?</h4>
+</div>
+
+<div class="faqItem__Header_Arrow"><img alt="" class="svg" src="images/arrow_down.svg"></div>
+</div>
+
+<div class="faqItem__Body_">
+<div class="faqItem__Body_Para">
+<p>Die Kollektiv-Poolanlage wird von der Bank organisiert und verwaltet. Jeder Anleger erhält dabei
+ein persönliches Unterkonto innerhalb des Pools, über das seine Beteiligung erfasst und verwaltet
+wird. So behalten Sie jederzeit den Überblick über Ihre Investition innerhalb der gemeinsamen
+Anlage.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="faqItem__">
+<div class="faqItem__Header_">
+<div class="faqItem__Header_Heading">
+<h4>Gibt es Mindest- oder Höchstanlagesummen?</h4>
+</div>
+
+<div class="faqItem__Header_Arrow"><img alt="" class="svg" src="images/arrow_down.svg"></div>
+</div>
+
+<div class="faqItem__Body_">
+<div class="faqItem__Body_Para">
+<p>Ja, die Mindestanlagesumme beträgt 20.000 Euro. Eine Höchstanlagesumme gibt es hingegen nicht
+– Sie können beliebig hohe Beträge in den Kollektiv-Pool investieren. </p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="faqItem__">
+<div class="faqItem__Header_">
+<div class="faqItem__Header_Heading">
+<h4>Welche steuerlichen Aspekte sind zu beachten?</h4>
+</div>
+
+<div class="faqItem__Header_Arrow"><img alt="" class="svg" src="images/arrow_down.svg"></div>
+</div>
+
+<div class="faqItem__Body_">
+<div class="faqItem__Body_Para">
+<p>Bei einer Kollektiv-Poolanlage erhält jeder Anleger ein persönliches Unterkonto. Die darauf
+erzielten Erträge unterliegen der individuellen Besteuerung des Anlegers gemäß den jeweiligen
+nationalen Steuervorschriften. Zudem gelten für das Unterkonto die jeweiligen Richtlinien und
+Schutzmechanismen der Einlagensicherung, die den Schutz Ihres Kapitals gewährleisten.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- faq end --><!-- haben start -->
+
+<section>
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<div class="habenSec__">
+<div class="habenSec__UpperText"><span></span></div>
+
+<div class="habenSec__Heading">
+<h3>Haben wir auch Ihr Interesse an einem persönlichen Angebot geweckt?</h3>
+</div>
+
+<div class="habenSec__Btn mt-4"><a class="button" href="contact-us.html">Angebot anfordern </a></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- haben end --><!-- footer start --></div>
+<div id="etf" class="page-section" style="display: none;"><!-- header end --><!-- header end --><!-- banner start -->
+
+<section>
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<div class="banner fond_Banner">
+<div class="col-md-6">
+<div class="bannerHeading__ mb-0">
+<h1>ETF</h1>
+
+<p>(Exchange Traded Fund)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- banner end --><!-- Gemeinsam start -->
+
+<section>
+<div class="container">
+<div class="row justify-content-center">
+<div class="col-md-10">
+<div class="secContent__">
+<div class="secContent__UpperText"><span>MIT ATTRAKTIVEN RENDITEMÖGLICHKEITEN</span></div>
+
+<div class="secContent__Heading">
+<h2>ETF: Eine effiziente Anlagemöglichkeit für jedermann</h2>
+</div>
+
+<div class="secContent__Para">
+<p>Exchange Traded Funds (ETF) haben sich in den letzten Jahren zu einer der beliebtesten Anlageformen entwickelt. Sie kombinieren die Vielfalt eines Investmentfonds mit der Einfachheit und Effizienz von Aktien. ETF bieten Anlegern die Möglichkeit, breit gestreut in Aktienindizes, Branchen, Rohstoffe oder Anleihen zu investieren, ohne einzelne Werte kaufen zu müssen. Durch die Börsennotierung können ETF jederzeit während der Handelszeiten gekauft und verkauft werden.</p>
+ 
+
+<h3><b>Für wen eignen sich ETF? </b></h3>
+ 
+
+<p>ETF eignen sich sowohl für erfahrene Anleger als auch für Einsteiger. Sie sind eine hervorragende Wahl für diejenigen, die ein diversifiziertes Portfolio aufbauen möchten, ohne die Zeit und Ressourcen für die Auswahl einzelner Aktien aufwenden zu müssen. Auch für langfristig orientierte Sparer, die Vermögen aufbauen möchten, bieten ETF eine attraktive Lösung.</p>
+ 
+
+<h3><b>Wie investiert man in ETF? </b></h3>
+ 
+
+<p>Der Kauf von ETF ist denkbar einfach und kann über ein Online-Brokerkonto erfolgen. Es ist wichtig, im Vorfeld die Anlageziele zu definieren und entsprechend passende ETF auszuwählen. Dabei sollten Anleger auf Faktoren wie die Kostenquote, die Performance und die Zusammensetzung des ETF achten.</p>
+</div>
+</div>
+</div>
+
+<div class="col-md-12">
+<div class="cardSectionList__">
+<div class="cardSectionList__Item__">
+<div class="cardSectionList__Item__Icon"><img alt="" class="svg" src="images/hand.svg"></div>
+
+<div class="cardSectionList__Item__Heading">
+<h3>Registrieren</h3>
+</div>
+
+<div class="cardSectionList__Item__Para">
+<p>Bei ABC Capital Corporation die Registrierung abschließen</p>
+</div>
+</div>
+
+<div class="cardSectionList__Item__">
+<div class="cardSectionList__Item__Icon"><img alt="" class="svg" src="images/invoice.svg"></div>
+
+<div class="cardSectionList__Item__Heading">
+<h3>Vermögensaufbau</h3>
+</div>
+
+<div class="cardSectionList__Item__Para">
+<p>Vermögensaufbau systematisch planen.</p>
+</div>
+</div>
+
+<div class="cardSectionList__Item__">
+<div class="cardSectionList__Item__Icon"><img alt="" class="svg" src="images/home.svg"></div>
+
+<div class="cardSectionList__Item__Heading">
+<h3>Risiko verringern</h3>
+</div>
+
+<div class="cardSectionList__Item__Para">
+<p>Durch Diversifikation das Risiko verringern</p>
+</div>
+</div>
+
+<div class="cardSectionList__Item__">
+<div class="cardSectionList__Item__Icon"><img alt="" class="svg" src="images/doller_coin.svg"></div>
+
+<div class="cardSectionList__Item__Heading">
+<h3>Rendite-Chancen</h3>
+</div>
+
+<div class="cardSectionList__Item__Para">
+<p>Attraktive Rendite-Chancen und das Langfristig</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Gemeinsam end --><!-- die vorteile start -->
+
+<section class="bgColor__ fonds_bgColor__">
+<div class="container">
+<div class="row flex-column-reverse flex-lg-row flex-lg-wrap">
+<div class="col-12 col-lg-6 align-self-center increaseWidth">
+<div class="dieSec__">
+<div class="dieSec__UpperText">
+<p></p>
+</div>
+
+<div class="dieSec__Heading">
+<h2>So funktionieren ETF!</h2>
+</div>
+
+<div class="dieSec__Para">
+<p>ETF bieten eine flexible, kosteneffiziente und transparente Möglichkeit, in die Finanzmärkte zu investieren. Mit ihrer Hilfe können Anleger von der Entwicklung ganzer Märkte oder Branchen profitieren, ohne in einzelne Aktien investieren zu müssen. Ob als Teil der Altersvorsorge, zur Vermögensbildung oder als taktisches Investmentinstrument – ETF sind eine überlegenswerte Option für jeden Anleger.</p>
+</div>
+
+<div class="freeQuoteSec__Content__List fest_freeQuoteSec__Content__List">
+<ul>
+	<li><b>Diversifikation:</b> Ein einziger ETF ermöglicht es, in eine breite Palette von Wertpapieren zu investieren, was das Anlagerisiko streut.</li>
+	<li><b>Kosteneffizienz:</b> ETF haben in der Regel niedrigere Verwaltungsgebühren als traditionelle Investmentfonds, was die Kosten für Anleger senkt.</li>
+	<li><b>Flexibilität:</b> ETF können jederzeit während der Börsenöffnungszeiten gekauft und verkauft werden, was schnelle Anpassungen im Portfolio ermöglicht.</li>
+	<li><b>Transparenz:</b> Die Zusammensetzung eines ETF ist stets einsehbar, wodurch Anleger genau wissen, in welche Wertpapiere sie investieren.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="col-12 col-lg-6 align-self-stretch mb-5 mb-lg-0">
+<div class="dieSec__img"><img alt="" class="d-block d-lg-none" src="images/fonds_section_two.jpg"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- die vorteile end -->
+
+<section>
+<div class="container">
+<div class="row justify-content-center">
+<div class="col-10">
+<div class="secContent__">
+<div class="secContent__UpperText"><span>WE HELFEN IMMER</span></div>
+
+<div class="secContent__Heading">
+<h2>FAQs</h2>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="faqItem__">
+<div class="faqItem__Header_">
+<div class="faqItem__Header_Heading">
+<h4>Was ist ein ETF?</h4>
+</div>
+
+<div class="faqItem__Header_Arrow"><img alt="" class="svg" src="images/arrow_down.svg"></div>
+</div>
+
+<div class="faqItem__Body_">
+<div class="faqItem__Body_Para">
+<p>Ein ETF ist ein börsengehandelter Fonds, der die Zusammensetzung und Performance eines bestimmten Indexes, wie z.B. den DAX, nachbildet. Anleger können Anteile eines ETF kaufen und verkaufen, ähnlich wie Aktien, was eine einfache und flexible Investition in ganze Märkte oder Branchen ermöglicht.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="faqItem__">
+<div class="faqItem__Header_">
+<div class="faqItem__Header_Heading">
+<h4>Welche Vorteile bieten ETF?</h4>
+</div>
+
+<div class="faqItem__Header_Arrow"><img alt="" class="svg" src="images/arrow_down.svg"></div>
+</div>
+
+<div class="faqItem__Body_">
+<div class="faqItem__Body_Para">
+<p>ETF bieten eine breite Diversifikation, da sie in viele verschiedene Wertpapiere investieren, die einen Index abbilden. Sie sind kosteneffizient, da ihre Verwaltungsgebühren in der Regel niedriger sind als die von aktiv verwalteten Fonds. Zudem bieten ETF eine hohe Liquidität und Flexibilität, da sie während der Börsenöffnungszeiten gehandelt werden können.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="faqItem__">
+<div class="faqItem__Header_">
+<div class="faqItem__Header_Heading">
+<h4>Wie unterscheiden sich ETF von traditionellen Investmentfonds?</h4>
+</div>
+
+<div class="faqItem__Header_Arrow"><img alt="" class="svg" src="images/arrow_down.svg"></div>
+</div>
+
+<div class="faqItem__Body_">
+<div class="faqItem__Body_Para">
+<p>Der Hauptunterschied liegt in der Handelbarkeit. ETF werden wie Aktien an der Börse gehandelt, während Anteile traditioneller Investmentfonds in der Regel einmal pro Tag zum Nettoinventarwert (NAV) gehandelt werden. Zudem sind ETF oft kostengünstiger und transparenter in Bezug auf ihre Zusammensetzung und Kosten.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="faqItem__">
+<div class="faqItem__Header_">
+<div class="faqItem__Header_Heading">
+<h4>Sind ETF für jeden Anlegertyp geeignet?</h4>
+</div>
+
+<div class="faqItem__Header_Arrow"><img alt="" class="svg" src="images/arrow_down.svg"></div>
+</div>
+
+<div class="faqItem__Body_">
+<div class="faqItem__Body_Para">
+<p>ETF können für eine breite Palette von Anlegern geeignet sein, von Anfängern bis hin zu erfahrenen Investoren. Sie bieten eine einfache Möglichkeit, in verschiedene Märkte und Branchen zu investieren. Allerdings sollten Anleger ihre Anlageziele, Risikotoleranz und den Anlagehorizont berücksichtigen, bevor sie in ETF investieren.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="faqItem__">
+<div class="faqItem__Header_">
+<div class="faqItem__Header_Heading">
+<h4>Wie kann ich in ETF investieren?</h4>
+</div>
+
+<div class="faqItem__Header_Arrow"><img alt="" class="svg" src="images/arrow_down.svg"></div>
+</div>
+
+<div class="faqItem__Body_">
+<div class="faqItem__Body_Para">
+<p>Um in ETF zu investieren, benötigen Sie ein Wertpapierdepot bei einer Bank oder einem Online-Broker. Nach der Eröffnung des Depots können Sie über die Börse ETF-Anteile kaufen und verkaufen, ähnlich wie Aktien.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="faqItem__">
+<div class="faqItem__Header_">
+<div class="faqItem__Header_Heading">
+<h4>Was sind die Risiken einer Investition in ETF?</h4>
+</div>
+
+<div class="faqItem__Header_Arrow"><img alt="" class="svg" src="images/arrow_down.svg"></div>
+</div>
+
+<div class="faqItem__Body_">
+<div class="faqItem__Body_Para">
+<p>Wie bei jeder Investition bestehen auch bei ETF Risiken, einschließlich Marktrisiko, Währungsrisiko und Zinsrisiko. Die Wertentwicklung eines ETF hängt von der Performance des zugrundeliegenden Indexes ab. Daher ist es wichtig, dass Anleger die Risiken verstehen und diversifizieren, um ihr Portfolio zu schützen.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- faq end --><!-- haben start -->
+
+<section>
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<div class="habenSec__">
+<div class="col-md-12">
+<div>
+<div class="habenSec__Heading profitierenSec__Heading">
+<h3>Zögern Sie nicht, uns jederzeit zu kontaktieren.</h3>
+</div>
+
+<div class="habenSec__Para profitierenSec__Para">
+<p>Durch den wiederkehrenden Kauf von Fondsanteilen ergibt sich der durchschnittliche Kaufpreis. Das minimiert Ihr Risiko ungemein. Welcher Fonds zu Ihrem Profil passt, hängt immer davon ab, wie groß Ihre Risikobereitschaft und die Renditeerwartung ist. Die Rendite ist immer vom Anlagefonds abhängig. Unseren Fonds gibt es in drei verschiedenen Varianten. Wir helfen Ihnen gerne dabei, die passende Variante zu wählen, die zu Ihren Bedürfnissen passt.</p>
+</div>
+
+<div class="habenSec__Btn"><a class="button" href="./contact-us.html">Angebot anfordern </a></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- haben end --><!-- haben start --><!-- haben end --><!-- footer start --></div>
+<div id="einlagensicherung" class="page-section" style="display: none;"><!-- header end --><!-- header end --><!-- banner start -->
+
+<section>
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<div class="banner een_Banner">
+<div class="col-md-6">
+<div class="bannerHeading__ bannerHeading__Break_word mb-0">
+<h1>Einlagensicherung</h1>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- banner end -->
+
+<section>
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<div class="freeQuoteSec__ freeQuoteSec__Responsive  flex-column-reverse flex-lg-row flex-lg-wrap">
+<div class="col-md-6 px-0 px-lg-3 align-self-center">
+<div class="freeQuoteSec__Content__UpperText"><span>EU - EINLAGENSICHERUNG</span></div>
+
+<div class="freeQuoteSec__Content__Heading">
+<h2>Die Einlagensicherung gilt innerhalb der gesamten EU</h2>
+</div>
+
+<div class="freeQuoteSec__Content__Para">
+<p>Die Einlagensicherung ist ein elementarer Pfeiler für stabile Finanzmärkte. Sie ist ein gesetzlich verankertes Bekenntnis zum EU-weiten Schutz aller Anleger und zur Regulierung der Stabilität innerhalb der Europäischen Union. Die Grundlage hierfür stellen die EU-Richtlinien 2009/14/EG und 2014/49/EU), die alle Mitgliedstaaten umsetzen müssen. Durch diese Sicherungseinrichtung sind Spareinlagen bis zu 100.000 EUR pro Kunde und pro Bank abgesichert. Bestimmte Mindestanforderungen für den Einlagenschutz sind hier vorgesehen, diese sind durch das jeweilige Bundesgesetz umgesetzt worden. In Deutschland besser bekannt als Einlagensicherungs– und Anlegerentschädigungsgesetz (AnlEntG). Die anderen EU-Staaten haben eigene Umsetzungsvorschriften.</p>
+</div>
+</div>
+
+<div class="col-md-6 px-0 px-lg-3 align-self-center mb-5 mb-lg-0"><img alt="" src="images/family.jpg" style="border-radius: 10px;" width="100%"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- die vorteile start -->
+
+<section class="bgColor__ einlagensicherung_bgColor__">
+<div class="container">
+<div class="row flex-column-reverse flex-lg-row flex-lg-wrap">
+<div class="col-12 col-lg-6 align-self-center increaseWidth">
+<div class="dieSec__">
+<div class="dieSec__UpperText">
+<p></p>
+</div>
+
+<div class="dieSec__Heading">
+<h2>Was ist die Einlagensicherung?</h2>
+</div>
+
+<div class="dieSec__Para">
+<p>Die Einlagensicherung ist ein Schutzmechanismus für das Geld von Bankkunden und  sorgt dafür, dass im Falle einer Insolvenz einer Bank die Kundengelder bis zu einem bestimmten Betrag geschützt sind. In Deutschland ist die Einlagensicherung gesetzlich vorgeschrieben und wird von der Entschädigungseinrichtung deutscher Banken (EdB) übernommen. Dabei sind pro Kunde und Bank bis zu 100.000 Euro geschützt. Die Einlagensicherung gilt für Guthaben auf Girokonten, Tagesgeldkonten, Festgeldkonten sowie für Spareinlagen und Wertpapierdepots. Es gibt allerdings Ausnahmen für bestimmte Finanzprodukte wie beispielsweise Investmentfonds oder Wertpapiere, bei denen das Risiko eines Verlustes höher ist.</p>
+</div>
+</div>
+</div>
+
+<div class="col-12 col-lg-6 align-self-stretch mb-5 mb-lg-0">
+<div class="dieSec__img"><img alt="" class="d-block d-lg-none" src="images/een_section_bg.jpg"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- die vorteile end --><!-- haben start -->
+
+<section>
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<div class="habenSec__">
+<div class="habenSec__Heading impressum_content_Break_Word">
+<h3>Die Einlagensicherung in Europa</h3>
+</div>
+
+<div class="habenSec__Para">
+<p>Die Europäische Union hat einheitliche Regeln zur Einlagensicherung etabliert, um das Vertrauen der Kunden in das Bankensystem zu stärken und die Stabilität innerhalb der EU zu wahren. Die EU-weit harmonisierte Einlagensicherung sorgt dafür, dass Spareinlagen in der Eurozone bis zu einem Betrag von 100.000 Euro je Kunde und Bank sowie in anderen Ländern wie Norwegen und der Schweiz bis zu einem höheren Betrag abgesichert sind. Jeder EU-Mitgliedsstaat ist dazu verpflichtet, ein nationales Einlagensicherungssystem einzurichten, um die Sparer abzusichern. Im Falle einer Insolvenz einer im EU-Ausland ansässigen Bank, bei der deutsche Kunden Einlagen haben, erfolgt die Entschädigung automatisch über das deutsche Sicherungssystem, ohne dass eine komplizierte Abwicklung über die ausländische Einlagensicherungseinrichtung notwendig ist. Für Sparer kann sich ein Blick ins EU-Ausland lohnen, um Geld in Termingeld oder Festgeld anzulegen, da auch dort die Einlagen der gesetzlichen Einlagensicherung unterliegen. So können sie von höheren Zinsen als bei deutschen Banken profitieren und dennoch sicher sein, dass ihre Einlagen abgesichert sind.</p>
+</div>
+
+<div class="habenSec__Btn mt-4"><a class="button" href="contact-us.html">Angebot anfordern </a></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- haben end --><!-- haben start --><!-- haben end --><!-- footer start --></div>
+<div id="freiwilligeeinlagensicherung" class="page-section" style="display: none;"><!-- header end --><!-- header end --><!-- banner start -->
+
+<section>
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<div class="banner een_Banner">
+<div class="col-md-6">
+<div class="bannerHeading__ bannerHeading__Break_word mb-0">
+<h1>Freiwillige Einlagensicherung</h1>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- banner end -->
+
+<section>
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<div class="freeQuoteSec__ freeQuoteSec__Responsive  flex-column-reverse flex-lg-row flex-lg-wrap">
+<div class="col-md-6 px-0 px-lg-3 align-self-center">
+<div class="freeQuoteSec__Content__UpperText"><span>Freiwillige EU-Einlagensicherung:</span></div>
+
+<div class="freeQuoteSec__Content__Heading">
+<h2>Ein Überblick</h2>
+</div>
+
+<div class="freeQuoteSec__Content__Para">
+<p>In der Europäischen Union wird der Schutz der Einlagen von Bankkunden durch verschiedene Maßnahmen und Richtlinien gewährleistet, zu denen auch die Einlagensicherungssysteme gehören. Diese Systeme dienen dazu, die Einlagen der Kunden im Falle einer Bankinsolvenz bis zu einem bestimmten Betrag zu schützen. Neben der gesetzlichen EU-Einlagensicherung (EinSig) gibt es auch die Möglichkeit einer freiwilligen EU-Einlagensicherung, die zusätzlichen Schutz und Sicherheit für die Kunde bieten kann.<br>
+<br>
+Zielsetzung und Nutzen<br>
+Die freiwillige EU-Einlagensicherung zielt darauf ab, das Vertrauen in das Banken- und Finanzsystem der EU zu stärken, indem sie über die gesetzlichen Anforderungen hinausgehenden Schutz bietet. Dieses System ergänzt die nationalen Sicherungssysteme und kann dazu beitragen, die potenziellen Auswirkungen von Bankinsolvenzen auf die Wirtschaft und die Kunde zu minimieren. Für Bankkunden bietet die Teilnahme ihrer Bank an einem freiwilligen Einlagensicherungssystem ein zusätzliches Sicherheitsnetz, das über die gesetzlich garantierte Absicherung hinausgeht.</p>
+</div>
+</div>
+
+<div class="col-md-6 px-0 px-lg-3 align-self-center mb-5 mb-lg-0"><img alt="" src="images/family.jpg" style="border-radius: 10px;" width="100%"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- die vorteile start -->
+
+<section class="bgColor__ einlagensicherung_bgColor__">
+<div class="container">
+<div class="row flex-column-reverse flex-lg-row flex-lg-wrap">
+<div class="col-12 col-lg-6 align-self-center increaseWidth">
+<div class="dieSec__">
+<div class="dieSec__UpperText">
+<p>Freiwillige EU-Einlagensicherung:</p>
+</div>
+
+<div class="dieSec__Heading">
+<h2>Funktionsweise</h2>
+</div>
+
+<div class="dieSec__Para">
+<p>Die freiwillige EU-Einlagensicherung basiert auf der Teilnahme von Banken an einem Einlagensicherungsfonds, der speziell für den Schutz von Einlagen oberhalb der durch die gesetzliche Einlagensicherung gedeckten Beträge eingerichtet wird. Die Teilnahme an diesem System ist für Banken nicht verpflichtend, sondern erfolgt auf freiwilliger Basis. Die genauen Bedingungen und der Umfang des Schutzes können je nach dem spezifischen Einlagensicherungsfonds variieren.<br>
+<br>
+Bedeutung für Bankkunden<br>
+Für Kunden von Banken, die an der freiwilligen EU-Einlagensicherung teilnehmen, bedeutet dies eine höhere Sicherheit ihrer Einlagen. Dies ist besonders relevant für Kunden mit Beträgen, die über der gesetzlichen Sicherungsgrenze liegen. Im Falle einer Bankinsolvenz können sie daher Anspruch auf eine Entschädigung haben, die über die standardmäßige Absicherung hinausgeht.</p>
+</div>
+</div>
+</div>
+
+<div class="col-12 col-lg-6 align-self-stretch mb-5 mb-lg-0">
+<div class="dieSec__img"><img alt="" class="d-block d-lg-none" src="images/een_section_bg.jpg"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- die vorteile end --><!-- haben start -->
+
+<section>
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<div class="habenSec__">
+<div class="habenSec__Heading impressum_content_Break_Word">
+<p style="font-size:32px;"><b>Erweiterter Schutz bis zu 5 Millionen Euro</b></p>
+</div>
+
+<div class="habenSec__Para">
+<p>Ein wesentliches Merkmal der freiwilligen EU-Einlagensicherung ist die erweiterte Schutzgrenze, die bis zu 5 Millionen Euro pro Kunde und Bank abdecken kann. Diese erhöhte Absicherungssumme geht weit über die üblichen gesetzlichen Grenzen hinaus, die in vielen EU-Mitgliedstaaten bei 100.000 Euro pro Kunde und Bank liegen. Die Möglichkeit, Einlagen bis zu einem Betrag von<br>
+1-5 Millionen Euro abzusichern, bietet eine bedeutende Zusatzsicherheit für Kunden, die höhere Guthaben auf ihren Bankkonten halten.<br>
+<br>
+Durch die Teilnahme an einem freiwilligen Einlagensicherungssystem, das eine derart hohe Absicherung bietet, setzen Banken ein starkes Signal in Bezug auf ihre Verpflichtung zur finanziellen Sicherheit und Stabilität. Für Kunden bedeutet dies eine erhebliche Erhöhung der Sicherheit ihrer Vermögenswerte, insbesondere für diejenigen, die größere Beträge anlegen oder sparen. Es handelt sich um eine attraktive Option für Kunden, die über die gesetzliche Absicherungsgrenze hinausgehenden Schutz suchen und Wert auf ein hohes Maß an Sicherheit für ihre finanziellen Mittel legen.</p>
+</div>
+
+<div class="habenSec__Btn mt-4"><a class="button" href="contact-us.html">Angebot anfordern </a></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- haben end --><!-- haben start --><!-- haben end --><!-- footer start --></div>
+<div id="about" class="page-section" style="display: none;"><!-- header end --><!-- header end --><!-- banner start -->
+
+<section>
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<div class="banner aboutUsBanner">
+<div class="col-md-6">
+<div class="bannerHeading__ mb-0">
+<h1>Über Uns</h1>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- banner end --><!-- Gemeinsam start -->
+
+<section>
+<div class="container">
+<div class="row flex-column-reverse flex-lg-row flex-lg-wrap">
+<div class="col-md-6 align-self-center">
+<div class="gemeinsam_sec__">
+<div class="gemeinsam_sec__UpperText">
+<p>Über Uns</p>
+</div>
+
+<div class="gemeinsam_sec__Heading">
+<h2>ABC Capital Corporation</h2>
+</div>
+
+<div class="gemeinsam_sec__ColorText"><span></span></div>
+
+<div class="gemeinsam_sec__Para">
+<p>Bei ABC Capital Corporation verstehen wir, dass jeder unserer Kunden einzigartige finanzielle Bedürfnisse und Ziele hat. Deshalb bieten wir individuelle Beratung und maßgeschneiderte Lösungen, die genau auf Ihre persönliche Situation zugeschnitten sind. Unser Ziel ist es, Ihnen zu helfen, Ihre finanziellen Ziele zu erreichen, sei es durch Vermögensaufbau, Altersvorsorge oder die Optimierung Ihrer aktuellen Finanzstrategie.<br>
+<br>
+<b>Warum ABC Capital Corporation?</b><br>
+<br>
+<b>Individuelle Beratung: </b>Bei uns stehen Sie im Mittelpunkt. Wir nehmen uns Zeit, um Sie und Ihre finanziellen Ziele wirklich zu verstehen.<br>
+<b>Expertise:</b> Unser Team besteht aus erfahrenen Finanzexperten, die über das nötige Know-how verfügen, um Ihnen exzellente Beratung zu bieten.<br>
+<b>Transparenz:</b> Wir legen großen Wert auf eine offene und ehrliche Kommunikation. Bei uns gibt es keine versteckten Gebühren oder Kosten.<br>
+<b>Vertrauen:</b> Unsere Kunden vertrauen uns, weil wir konsequent Ergebnisse liefern und stets in ihrem besten Interesse handeln.</p>
+</div>
+</div>
+</div>
+
+<div class="col-md-6 align-self-center mb-5 mb-lg-0">
+<div class="secImg__"><img alt="" src="images/section_one.png"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Gemeinsam end --><!-- PARTNERS start -->
+
+<section>
+<div class="container">
+<div class="row justify-content-center">
+<div class="col-md-10">
+<div class="secContent__">
+<div class="secContent__UpperText"><span>UNSERE PARTNERBANKEN</span></div>
+
+<div class="secContent__Heading">
+<h2>Über 62 Partnerbanken in über 26 Ländern</h2>
+</div>
+</div>
+</div>
+
+<div class="col-md-12">
+<div class="partnersSec__List">
+<div class="partnersSec__Item"><img alt="" src="../images/ll.png"></div>
+
+<div class="partnersSec__Item"><img alt="" src="../images/kh.png"></div>
+
+<div class="partnersSec__Item"><img alt="" src="../images/tb.png"></div>
+
+<div class="partnersSec__Item"><img alt="" src="../images/kbc.png"></div>
+
+<div class="partnersSec__Item"><img alt="" src="../images/efg.png"></div>
+
+<div class="partnersSec__Item"><img alt="" src="../images/peg.png"></div>
+
+<div class="partnersSec__Item"><img alt="" src="../images/citi.png"></div>
+
+<div class="partnersSec__Item"><img alt="" src="../images/erste.png"></div>
+
+<div class="partnersSec__Item"><img alt="" src="../images/cai.png"></div>
+
+<div class="partnersSec__Item"><img alt="" src="../images/bbva.png"></div>
+
+<div class="partnersSec__Item"><img alt="" src="../images/bar.png"></div>
+
+<div class="partnersSec__Item"><img alt="" src="../images/ing.png"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- PARTNERS end --><!-- die vorteile start -->
+
+<section class="bgColor__ aboutBgColor__">
+<div class="container">
+<div class="row flex-column-reverse flex-lg-row flex-lg-wrap">
+<div class="col-12 col-lg-6 align-self-center increaseWidth">
+<div class="dieSec__">
+<div class="dieSec__UpperText">
+<p>Unsere Dienstleistungen</p>
+</div>
+
+<div class="dieSec__Heading">
+<h2>Unsere Kunden sprechen uns seit  Jahren ihr Vertrauen aus...</h2>
+</div>
+
+<div class="dieSec__Para">
+<p>Wir spezialisieren uns auf eine Vielzahl von Finanzdienstleistungen, darunter individuelle Vermögensberatung, Termin- Kollektiv und Flexgeldanlagen sowie maßgeschneiderte Lösungen für die Vermögensverwaltung. Dank unserer lokalen Präsenz und globalen Perspektive bieten wir Ihnen Zugang zu erstklassigen Anlagemöglichkeiten und exklusiven Finanzprodukten.<br>
+<br>
+<b>Unser Engagement für Exzellenz</b><br>
+Bei ABC Capital Corporation legen wir großen Wert auf die Qualität unserer Dienstleistungen und die Zufriedenheit unserer Kunden. Wir verpflichten uns zur Einhaltung höchster ethischer Standards und zur transparenten Kommunikation, um Ihnen eine vertrauensvolle und sichere Anlageerfahrung zu garantieren.<br>
+<br>
+<b>Kontakt und persönliche Beratung</b><br>
+Wir laden Sie herzlich ein, mehr über ABC Capital Corporation zu erfahren und unsere Dienstleistungen zu entdecken. Für eine persönliche Beratung oder weitere Informationen stehen wir Ihnen gerne zur Verfügung. Besuchen Sie uns oder kontaktieren Sie uns, um Ihre finanziellen Ziele mit uns zu besprechen.</p>
+</div>
+</div>
+</div>
+
+<div class="col-12 col-lg-6 align-self-stretch mb-5 mb-lg-0">
+<div class="dieSec__img"><img alt="" class="d-block d-lg-none" src="images/about_section_two.png"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- die vorteile end --><!-- haben start -->
+
+<section>
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<div class="habenSec__ d-flex flex-wrap justify-content-end profitierenSec__">
+<div class="col-md-9">
+<div class="text-end">
+<div class="habenSec__Heading profitierenSec__Heading">
+<h3>Profitieren Sie von unseren Anlage Angeboten</h3>
+</div>
+
+<div class="habenSec__Btn"><a class="button" href="./contact-us.html">Angebot anfordern </a></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- haben end --><!-- lander start -->
+
+<section>
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<div class="bg_color__">
+<div class="bg_color__Item">
+<div class="bg_color__Item_Content">
+<div class="bg_color__Item_Content_Icon"><img alt="" class="svg" src="../images/l%C3%A4nder.svg"></div>
+
+<div class="bg_color__Item_Content_Text">
+<h3><span class="odometer" data-count="26">0</span>+</h3>
+</div>
+</div>
+
+<div class="bg_color__Item_Heading">
+<h2>Länder</h2>
+</div>
+</div>
+
+<div class="bg_color__Item">
+<div class="bg_color__Item_Content">
+<div class="bg_color__Item_Content_Icon"><img alt="" class="svg" src="images/sparer.svg"></div>
+
+<div class="bg_color__Item_Content_Text">
+<h3><span class="odometer" data-count="18.6">0.0</span> tsd. +</h3>
+</div>
+</div>
+
+<div class="bg_color__Item_Heading">
+<h2>Sparer</h2>
+</div>
+</div>
+
+<div class="bg_color__Item">
+<div class="bg_color__Item_Content">
+<div class="bg_color__Item_Content_Icon"><img alt="" class="svg" src="images/einlagen.svg"></div>
+
+<div class="bg_color__Item_Content_Text">
+<h3><span class="odometer" data-count="245">0</span> €mio. +</h3>
+</div>
+</div>
+
+<div class="bg_color__Item_Heading">
+<h2>Einlagen</h2>
+</div>
+</div>
+
+<div class="bg_color__Item">
+<div class="bg_color__Item_Content">
+<div class="bg_color__Item_Content_Icon"><img alt="" class="svg" src="images/banken.svg"></div>
+
+<div class="bg_color__Item_Content_Text">
+<h3><span class="odometer" data-count="62">0</span>+</h3>
+</div>
+</div>
+
+<div class="bg_color__Item_Heading">
+<h2>Banken</h2>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- lander end --><!-- footer start --></div>
+<div id="contact" class="page-section" style="display: none;"><!-- header end --><!-- banner start -->
+
+<section>
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<div class="banner contactUsBanner">
+<div class="col-md-6">
+<div class="bannerHeading__ mb-0">
+<h1>Kontakt</h1>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- banner end --><!-- Gemeinsam start -->
+
+<section>
+<div class="container">
+<div class="row">
+<div class="col-lg-6 align-self-center mb-5 mb-lg-0">
+<div class="gemeinsam_sec__ gemeinsam_sec__Responsive">
+<div class="gemeinsam_sec__UpperText">
+<p class="text-start">Kontakt</p>
+</div>
+
+<div class="gemeinsam_sec__Heading">
+<h2 class="text-start">Rufen Sie unsere Fachberater an</h2>
+</div>
+
+<div class="gemeinsam_sec__ColorText flex-wrap">
+<div class="gemeinsam_sec__ColorText_Item w-100">
+<div class="gemeinsam_sec__ColorText_Item_Icon"><img alt="" class="svg" src="images/phone2.svg"><a href="tel:+41 (22) 502 75 98">+41 (22) 502 75 98</a></div>
+
+<div class="gemeinsam_sec__ColorText_Item_Content"></div>
+
+<p> </p>
+
+<div class="gemeinsam_sec__ColorText_Item_Icon"><img alt="" class="svg" src="images/message2.svg"><a href="mailto:info@abccapitalcorporation.com" style="font-size:18px;">info@abccapitalcorporation.com</a></div>
+</div>
+</div>
+
+<div class="gemeinsam_sec__Para contact_Gemeinsam_sec__Para">
+<p class="text-start"><span>Zentrale</span>Rue du Cendrier 15, 1201 Genève, Schweiz</p>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6 align-self-center">
+<div class="secForm__">
+<form action="https://getform.io/f/aejvyrgb" method="POST">
+<div class="form-group"><input class="form-control" id="Name" name="Name" placeholder="Name" type="text"></div>
+
+<div class="form-group"><input class="form-control" id="E-mail-Adresse" name="E-mail-Adresse" placeholder="E-mail Adresse" type="email"></div>
+
+<div class="form-group"><input class="form-control" id="Telefonnummer" name="Telefonnummer" placeholder="Telefonnummer" type="number"></div>
+
+<div class="form-group"><input class="form-control" id="Betreff" name="Betreff" placeholder="Betreff" type="text"></div>
+
+<div class="form-group"><textarea class="form-control" cols="30" id="Schreiben" name="Schreiben" placeholder="Schreiben Sie uns doch eine Nachricht" rows="10"></textarea></div>
+
+<div class="form-group mb-0"><button class="button d-block w-100 mb-0" type="submit">Nachricht senden</button></div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Gemeinsam end --><!-- haben start -->
+
+<section>
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<div class="habenSec__ d-flex flex-wrap justify-content-end profitierenSec__">
+<div class="col-md-9">
+<div class="text-end">
+<div class="habenSec__Heading profitierenSec__Heading">
+<h3>Profitieren Sie von unseren exclusive Angeboten</h3>
+</div>
+
+<div class="habenSec__Btn"><a class="button" href="./contact-us.html">Angebot anfordern </a></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- haben end --><!-- map start -->
+
+<section>
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<div class="map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2761.1724734980558!2d6.141725075950454!3d46.20702388357142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c65287efbee01%3A0xf8cf35c74885288c!2sRue%20du%20Cendrier%2015%2C%201201%20Gen%C3%A8ve%2C%20Schweiz!5e0!3m2!1sde!2sde!4v1776164488701!5m2!1sde!2sde" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+</div>
+</div>
+</div>
+</section>
+<!-- map end --><!-- footer start --></div>
+</main>
+<footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="footer">
+              <div class="row">
+                <div class="col-lg-4 my-3 mb-lg-0">
+                  <div class="footerContent__">
+                    <div class="footerLogo__">
+                      <img src="images/footer.png" alt="">
+                    </div>
+                    <div class="footerPara__">
+                      <p>
+                        ABC Capital Corporation: Ihr Partner für finanzielle
+                        Sicherheit und Wachstum. Wir bieten maßgeschneiderte
+                        Anlagelösungen, gepaart mit exklusiven Vorteilen durch
+                        unsere renommierten Bankenpartnerschaften, um Ihre
+                        finanziellen Ziele zu erreichen und zu übertreffen.
+                        Vertrauen Sie auf unsere Expertise für eine
+                        transparente, sichere und profitable Geldanlage.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-5 my-3 mb-lg-0">
+                  <div class="footerLinks__">
+                    <div class="footerLinks__Heading">
+                      <h4>Kontakt</h4>
+                    </div>
+                    <div class="footerLinks__List__">
+                      <div class="footerLinks__List__Item">
+                        <a href="mailto:info@abccapitalcorporation.com"><img src="images/message.svg" alt="">
+                          info@abccapitalcorporation.com</a>
+                      </div>
+                      <div class="footerLinks__List__Item">
+                        <div class="footerLinks__List__Item_Heading">
+                          <h5>Zentrale</h5>
+                        </div>
+                        <div>
+                          <img src="images/location.svg" alt="">
+                          Rue du Cendrier 15 1201 Genève, Schweiz
+                        </div>
+                      </div>
+                      <div class="footerLinks__List__Item">
+                        
+                        
+                      </div>
+                      <div class="footerLinks__List__Item">
+                        <div class="footerLinks__List__Item_Heading">
+                          <h5>Sprechzeiten</h5>
+                        </div>
+                        <div class="footerLinks__List__Item_Para">
+                          <p>
+                            Mo – Do: 09:30 Uhr bis 18:30 Uhr<br>
+                            Fr : 09:30 Uhr bis 17:30 Uhr <br>
+							  Sa u. So: Geschlossen <br>
+                            
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 my-3 mb-lg-0">
+                  <div class="footerText__">
+                    <div class="footerText__Content">
+                      <div class="footerLinks__Heading">
+                        <h4>Newsletter</h4>
+                      </div>
+                      <div class="footerPara__">
+                        <p>
+                          Abonnieren auch Sie unseren Newsletter, um von unseren
+                          neuesten Updates & Neuigkeiten zu profitieren
+                        </p>
+                      </div>
+                    </div>
+                    <div class="footerText__Input">
+                      <input type="email" name="" id="" placeholder="Email Adresse">
+                    </div>
+                    <div class="footerLink__Item__">
+                      <a href="tel:+41 (22) 502 75 98">
+                        <div class="footerLink__Item__Icon">
+                          <img src="images/phone.svg" alt="">
+                        </div>
+                        <div class="footerLink__Item__Content">
+                          <p>+41 (22) 502 75 98</p>
+                          <span style="font-size:12px;">Rufen Sie unsere Fachberater an</span>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 my-3 mb-lg-0">
+                  <hr class="bg-white m-0">
+                  <div class="footer_copyRight_text">
+                    <p class="site-footer__bottom-text">
+                      © All Copyright 2016 by
+                      <a href="#">ABC Capital Corporation</a> |
+                      <a href="pages/impressum.html">Impressum</a> |
+                      <a href="pages/datenschutz.html">Datenschutz</a> |
+                      <a href="pages/agb.html">AGBs</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+    <!-- footer end -->
+
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/odometer.min.js"></script>
+    <script src="js/swiper-bundle.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        breakpoints: {
+          576: {
+            slidesPerView: 1,
+          },
+          768: {
+            slidesPerView: 2,
+          },
+          1024: {
+            slidesPerView: 3,
+          },
+        },
+      });
+
+      var swiper = new Swiper(".reviewSlider", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        breakpoints: {
+          576: {
+            slidesPerView: 1,
+          },
+          768: {
+            slidesPerView: 2,
+          },
+          1024: {
+            slidesPerView: 3,
+          },
+        },
+      });
+
+    </script>
+  
+
+</body>
+
+<script>
+    function showPage(pageId) {
+        if (!pageId || pageId === '#') pageId = '#home';
+        const targetId = pageId.replace('#', '');
+        
+        // Hide all sections
+        document.querySelectorAll('.page-section').forEach(section => {
+            section.style.display = 'none';
+        });
+        
+        // Show target section
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+            targetSection.style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+        
+        // Close sidebar if open
+        const sideBar = document.querySelector('.sideBar__');
+        if (sideBar) {
+            sideBar.classList.remove('active');
+        }
+    }
+
+    // Handle hash change
+    window.addEventListener('hashchange', () => {
+        showPage(window.location.hash);
+    });
+
+    // Initial load
+    window.addEventListener('load', () => {
+        if (window.location.hash) {
+            showPage(window.location.hash);
+        }
+    });
+
+    // Intercept all hash links to ensure smooth behavior
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (link && link.getAttribute('href') && link.getAttribute('href').startsWith('#')) {
+            showPage(link.getAttribute('href'));
+        }
+    });
+</script>
+
+</html>
