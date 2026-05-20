@@ -1542,7 +1542,7 @@ footer {
 }
 
 .aboutBgColor__::after {
-    background-image: url(../images/about_section_two.png);
+    background-image: url(../images/about_section_two.jpg);
 }
 
 .profitierenSec__ {
@@ -1898,6 +1898,7 @@ footer {
 
 .einlagensicherung_bgColor__::after {
     background-image: url(../images/een_section_bg.jpg);
+    background-position: center 65%;
 }
 
 /* einlagensicherung end */
