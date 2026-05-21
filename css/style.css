@@ -1675,7 +1675,7 @@ footer {
 
 .gemeinsam_sec__ColorText_Item {
     text-decoration: none;
-    display: flex;
+    display: block;
     flex-flow: row wrap;
     align-items: center;
     margin-bottom: 20px;
