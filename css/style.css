@@ -442,7 +442,7 @@ header nav ul:has(.searchBarInput.showField) {
     overflow: hidden;
     width: 100%;
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
 }
 
@@ -689,10 +689,23 @@ header nav ul:has(.searchBarInput.showField) {
     margin-bottom: 25px;
 }
 
+.dieSec__BulletList {
+    list-style-type: disc;
+    list-style-position: outside;
+    padding-left: 1.6em;
+    margin: 0 0 25px;
+}
+
+.dieSec__BulletList li {
+    margin-bottom: 15px;
+}
+
 .increaseWidth {
     max-width: 53% !important;
     flex: 0 0 53% !important;
 }
+
+
 
 /* die vorteile end */
 
@@ -1494,7 +1507,7 @@ footer {
 }
 
 .een_Banner {
-    background-image: url(../images/einlagensicherung.jpg);
+    background-image: url(../images/einlagensicherung.png);
     padding: 146px 50px;
     background-size: cover;
 }
