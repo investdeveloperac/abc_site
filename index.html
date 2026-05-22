@@ -2701,24 +2701,42 @@
             <div class="col-lg-6 align-self-center">
               <div class="secForm__">
                 <form action="https://api.web3forms.com/submit" method="POST">
+
                   <input type="hidden" name="access_key" value="6b448ba9-2aa5-4dcf-af93-3238d4dc96d4">
-                  <div class="form-group"><input class="form-control" id="Name" name="name" placeholder="Name"
-                      type="text" required></div>
 
-                  <div class="form-group"><input class="form-control" id="E-mail-Adresse" name="email"
-                      placeholder="E-mail Adresse" type="email" required></div>
+                  <!-- Spam koruması -->
+                  <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
-                  <div class="form-group"><input class="form-control" id="Telefonnummer" name="tel"
-                      placeholder="Telefonnummer" type="tel"></div>
+                  <!-- Redirect -->
+                  <input type="hidden" name="redirect" value="https://frominvest-ag.com/thanks.html">
 
-                  <div class="form-group"><input class="form-control" id="Betreff" name="betreff" placeholder="Betreff"
-                      type="text"></div>
+                  <div class="form-group">
+                    <input class="form-control" name="name" placeholder="Name" type="text" required>
+                  </div>
 
-                  <div class="form-group"><textarea class="form-control" cols="30" id="Schreiben" name="message"
-                      placeholder="Schreiben Sie uns doch eine Nachricht" rows="10" required></textarea></div>
+                  <div class="form-group">
+                    <input class="form-control" name="email" placeholder="E-mail Adresse" type="email" required>
+                  </div>
 
-                  <div class="form-group mb-0"><button class="button d-block w-100 mb-0" type="submit">Nachricht
-                      senden</button></div>
+                  <div class="form-group">
+                    <input class="form-control" name="phone" placeholder="Telefonnummer" type="tel">
+                  </div>
+
+                  <div class="form-group">
+                    <input class="form-control" name="subject" placeholder="Betreff" type="text">
+                  </div>
+
+                  <div class="form-group">
+                    <textarea class="form-control" name="message" placeholder="Schreiben Sie uns doch eine Nachricht"
+                      rows="10" required></textarea>
+                  </div>
+
+                  <div class="form-group mb-0">
+                    <button class="button d-block w-100 mb-0" type="submit">
+                      Nachricht senden
+                    </button>
+                  </div>
+
                 </form>
               </div>
             </div>
