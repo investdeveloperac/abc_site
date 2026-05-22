@@ -942,6 +942,110 @@ header nav ul:has(.searchBarInput.showField) {
 
 /* landerm end */
 
+.bankTicker__section {
+    padding: 40px 0 30px;
+}
+
+.bankTicker__box {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 24px 20px;
+    backdrop-filter: blur(14px);
+}
+
+.bankTicker__heading {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.bankTicker__heading h2 {
+    font-size: 24px;
+    font-family: "M-EB", sans-serif;
+    color: #ffffff;
+    margin: 0;
+}
+
+.bankTicker__track-wrap {
+    overflow: hidden;
+    position: relative;
+}
+
+.bankTicker__track {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 18px;
+    width: max-content;
+    animation: bankTickerScroll 36s linear infinite;
+}
+
+.bankTicker__item {
+    flex: 0 0 auto;
+    min-width: 170px;
+    padding: 16px 20px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 14px 50px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.bankTicker__item img {
+    display: block;
+    max-height: 42px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.bankTicker__logo {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    color: #17233d;
+    line-height: 1.3;
+}
+
+@keyframes bankTickerScroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .bankTicker__box {
+        padding: 18px 15px;
+    }
+
+    .bankTicker__heading h2 {
+        font-size: 20px;
+    }
+
+    .bankTicker__item {
+        min-width: 140px;
+        padding: 14px 14px;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .bankTicker__section {
+        padding: 30px 0 20px;
+    }
+
+    .bankTicker__heading h2 {
+        font-size: 18px;
+    }
+
+    .bankTicker__item {
+        min-width: 120px;
+        padding: 12px 12px;
+    }
+}
+
 /* review slider start */
 
 .reviewCard__ {
@@ -1547,6 +1651,7 @@ footer {
     background-size: cover;
     background-position: top center;
 }
+
 .artikel3_Banner {
     background-image: url(../images/etf1.jpg);
     padding: 146px 50px;
@@ -1883,6 +1988,7 @@ footer {
 .fest_bgColor__::after {
     background-image: url(../images/fest_section_two.jpg);
 }
+
 .fest_bgColor2__::after {
     background-image: url(../images/FestGeld_Business.jpg);
 }
@@ -2122,11 +2228,25 @@ footer {
 }
 
 /* other pages end */
-		
+
 /* other changes start */
 
 .range_slider_main>.range_slider>.range_slider_item>#input_range[type="text"] {
-	width: calc(100% - 17px);
+    width: calc(100% - 17px);
+}
+
+.bankTicker__item img {
+    height: 42px;
+    width: auto;
+    object-fit: contain;
+    opacity: .85;
+    transition: .3s;
+}
+
+.bankTicker__item img:hover {
+    filter: none;
+    opacity: 1;
+    transform: scale(1.05);
 }
 
 /* other changes end*/
