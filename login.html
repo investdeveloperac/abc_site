@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kundenbereich - FromInvest AG</title>
+  
+  <link rel="apple-touch-icon" href="images/logo.svg">
+  <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+  
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/portal.css">
+  <!-- EmailJS CDN -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body class="login-body">
+
+  <div class="auth-container">
+    <div class="auth-header">
+      <a href="index.html">
+        <img src="images/logo.svg" alt="FromInvest AG" class="login-logo">
+      </a>
+      <div class="auth-tabs">
+        <button class="tab-btn active" onclick="switchTab('login')">Einloggen</button>
+        <button class="tab-btn" onclick="switchTab('register')">Registrieren</button>
+      </div>
+    </div>
+
+    <div class="auth-body">
+      
+      <!-- Error & Success Messages -->
+      <div id="authError" class="error-msg"></div>
+      <div id="authSuccess" class="success-msg"></div>
+
+      <!-- Login Section -->
+      <div id="loginSection" class="form-section active">
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="loginEmail">E-Mail-Adresse</label>
+            <input type="email" id="loginEmail" class="form-control" placeholder="ihre.mail@domain.com" required>
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Passwort</label>
+            <input type="password" id="loginPassword" class="form-control" placeholder="Ihr Passwort" required>
+            <div style="text-align: right; margin-top: 8px;">
+              <a href="#" id="forgotPasswordLink" style="font-size: 13px; color: var(--accent-color); text-decoration: none; font-weight: 600;">Passwort vergessen?</a>
+            </div>
+          </div>
+          <button type="submit" class="btn-submit" id="loginBtn">Einloggen</button>
+        </form>
+      </div>
+
+      <!-- Register Section -->
+      <div id="registerSection" class="form-section">
+        <form id="registerForm">
+          <div class="row-group">
+            <div class="form-group">
+              <label for="regFirstName">Vorname</label>
+              <input type="text" id="regFirstName" class="form-control" placeholder="Max" required>
+            </div>
+            <div class="form-group">
+              <label for="regLastName">Nachname</label>
+              <input type="text" id="regLastName" class="form-control" placeholder="Mustermann" required>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="regBirthDate">Geburtsdatum</label>
+            <input type="date" id="regBirthDate" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="regEmail">E-Mail-Adresse</label>
+            <input type="email" id="regEmail" class="form-control" placeholder="max.mustermann@example.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="regPhone">Telefonnummer</label>
+            <input type="tel" id="regPhone" class="form-control" placeholder="+49 170 1234567" required>
+          </div>
+
+          <div class="form-group">
+            <label for="regPassword">Passwort</label>
+            <input type="password" id="regPassword" class="form-control" placeholder="Mindestens 6 Zeichen" required minlength="6">
+          </div>
+          
+          <button type="submit" class="btn-submit" id="registerBtn">Jetzt Registrieren</button>
+        </form>
+      </div>
+
+      <!-- OTP Verification Section -->
+      <div id="otpSection" class="form-section">
+        <div style="text-align: center; margin-bottom: 20px;">
+          <h3 style="font-size: 20px; color: var(--dark-bg); margin-bottom: 8px;">2-Faktor-Verifizierung</h3>
+          <p style="font-size: 14px; color: #64748b; line-height: 1.4;">
+            Wir haben einen 6-stelligen Verifizierungscode an <strong id="otpSentEmail">...</strong> gesendet. Bitte geben Sie den Code hier ein:
+          </p>
+        </div>
+        <form id="otpForm">
+          <div class="form-group" style="text-align: center;">
+            <input type="text" id="otpCode" class="form-control" placeholder="123456" required maxlength="6" pattern="[0-9]{6}" 
+                   style="font-size: 24px; text-align: center; letter-spacing: 8px; font-weight: bold; max-width: 200px; margin: 0 auto;">
+          </div>
+          <button type="submit" class="btn-submit" id="otpBtn" style="margin-top: 15px;">Code verifizieren</button>
+          
+          <div style="text-align: center; margin-top: 15px; font-size: 13px;">
+            <span style="color: #64748b;">Code nicht erhalten? </span>
+            <a href="#" id="resendOtpLink" style="color: var(--accent-color); text-decoration: none; font-weight: 600;">Erneut senden</a>
+            <span id="otpTimer" style="color: #64748b; margin-left: 5px;"></span>
+          </div>
+          <div style="text-align: center; margin-top: 15px;">
+            <a href="#" id="cancelOtpLink" style="font-size: 13px; color: #ef4444; text-decoration: none; font-weight: 600;">Abbrechen</a>
+          </div>
+        </form>
+      </div>
+
+      <a href="index.html" class="back-link">← Zurück zur Startseite</a>
+    </div>
+  </div>
+
+  <script>
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.form-section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById('authError').style.display = 'none';
+      document.getElementById('authSuccess').style.display = 'none';
+
+      if (tabId === 'login') {
+        document.querySelectorAll('.tab-btn')[0].classList.add('active');
+        document.getElementById('loginSection').classList.add('active');
+      } else {
+        document.querySelectorAll('.tab-btn')[1].classList.add('active');
+        document.getElementById('registerSection').classList.add('active');
+      }
+    }
+  </script>
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>

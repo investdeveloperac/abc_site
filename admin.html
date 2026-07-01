@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - FromInvest AG</title>
+  
+  <link rel="apple-touch-icon" href="images/logo.svg">
+  <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+  
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/portal.css">
+</head>
+<body style="margin: 0; background-color: #f1f5f9;">
+
+  <!-- Auths Overlay for Verification check -->
+  <div id="authOverlay">
+    <h2>Autorisierung erforderlich</h2>
+    <p>Prüfe Administratorrechte, bitte warten...</p>
+  </div>
+
+  <div class="admin-wrapper">
+    <!-- Left Sidebar: User Directory -->
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-header">
+        <a href="index.html">
+          <img src="images/logo.svg" alt="Logo" style="max-width: 150px; filter: brightness(0) invert(1); margin-bottom: 15px; display: block;">
+        </a>
+        <h2>Admin Dashboard</h2>
+        <p>Registrierte Kunden verwalten</p>
+      </div>
+      
+      <div class="admin-user-list" id="userListContainer">
+        <!-- Rendered dynamically via js/admin.js -->
+      </div>
+      
+      <div class="sidebar-footer" style="background-color: #0f172a;">
+        <button class="btn-logout-sidebar" id="adminLogoutBtn" style="color: #fca5a5;">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+          </svg>
+          Portal Abmelden
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <div style="flex: 1; display: flex; flex-direction: column; overflow: hidden;">
+      
+      <!-- Empty State -->
+      <div class="admin-empty-state" id="emptyMain">
+        Wählen Sie einen Kunden aus der linken Liste aus, um das Portfolio zu bearbeiten.
+      </div>
+
+      <!-- User Actions Panel -->
+      <main class="admin-main" id="adminMain" style="display: none;">
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 2px solid var(--border-color); padding-bottom: 15px;">
+          <h1 style="margin: 0; font-size: 26px; font-weight: 800; color: var(--text-dark);" id="selUserName">Kunde</h1>
+          <span style="background: #fbbf24; color: #78350f; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 800;">ID: <span id="selUserId"></span></span>
+        </div>
+
+        <!-- Quick actions -->
+        <div class="admin-card">
+          <div class="admin-card-title">Schnellaktionen</div>
+          <button class="btn-admin warning" id="btnResetPassword">Passwort-Reset-E-Mail senden</button>
+          <span id="resetMsg" style="margin-left: 15px; font-size: 13px; font-weight: bold;"></span>
+        </div>
+
+        <!-- Edit Profile Panel -->
+        <div class="admin-card">
+          <div class="admin-card-title">Kundenprofil bearbeiten</div>
+          <form id="adminProfileForm">
+            <div class="row-group">
+              <div class="form-group" style="flex: 1;">
+                <label>Vorname</label>
+                <input type="text" id="editFirstName" class="form-control" required>
+              </div>
+              <div class="form-group" style="flex: 1;">
+                <label>Nachname</label>
+                <input type="text" id="editLastName" class="form-control" required>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>Geburtsdatum</label>
+              <input type="date" id="editBirthDate" class="form-control" required>
+            </div>
+
+            <div class="row-group">
+              <div class="form-group" style="flex: 1;">
+                <label>E-Mail-Adresse (Gesperrt)</label>
+                <input type="email" id="editEmail" class="form-control" disabled style="background-color: #f1f5f9; cursor: not-allowed;">
+              </div>
+              <div class="form-group" style="flex: 1;">
+                <label>Telefonnummer</label>
+                <input type="text" id="editPhone" class="form-control">
+              </div>
+            </div>
+            
+            <button type="submit" class="btn-admin primary">Profil Speichern</button>
+            <span id="profSaveMsg" style="margin-left: 15px; font-size: 13px; color: var(--success-text); font-weight: bold;"></span>
+          </form>
+        </div>
+
+        <!-- Add Investment Panel -->
+        <div class="admin-card">
+          <div class="admin-card-title">Neue Anlage hinzufügen</div>
+          <form id="adminAddInvForm">
+            <div class="row-group">
+              <div class="form-group" style="flex: 1;">
+                <label>Bank</label>
+                <input type="text" id="invBank" class="form-control" placeholder="z.B. Deutsche Bank, ING, Sparkasse" required>
+              </div>
+              <div class="form-group" style="flex: 1;">
+                <label>Anlageart</label>
+                <input type="text" id="invType" class="form-control" placeholder="z.B. Termingeld, Flexgeld" required>
+              </div>
+            </div>
+
+            <div class="row-group">
+              <div class="form-group" style="flex: 1;">
+                <label>Betrag (€)</label>
+                <input type="number" id="invAmount" class="form-control" placeholder="z.B. 100000" min="1" required>
+              </div>
+              <div class="form-group" style="flex: 1;">
+                <label>Zinssatz (% p.a.)</label>
+                <input type="number" step="0.01" id="invYield" class="form-control" placeholder="z.B. 4.40" min="0" required>
+              </div>
+            </div>
+
+            <div class="row-group">
+              <div class="form-group" style="flex: 1;">
+                <label>Startdatum</label>
+                <input type="date" id="invStart" class="form-control" required>
+              </div>
+              <div class="form-group" style="flex: 1;">
+                <label>Enddatum</label>
+                <input type="date" id="invEnd" class="form-control" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Laufzeit (Monate)</label>
+              <input type="number" id="invMonths" class="form-control" placeholder="z.B. 12" min="1" required>
+            </div>
+
+            <button type="submit" class="btn-admin primary">Anlage dem Kunden hinzufügen</button>
+          </form>
+        </div>
+
+        <!-- Portfolio Listing Panel -->
+        <div class="admin-card">
+          <div class="admin-card-title">Aktuelles Portfolio des Kunden</div>
+          <div id="adminPortfolioList">
+            <!-- Populated via js/admin.js -->
+          </div>
+        </div>
+
+      </main>
+
+    </div>
+  </div>
+
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>

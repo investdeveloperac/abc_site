@@ -1,0 +1,288 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, collection, getDocs, doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+// ==========================================
+// FIREBASE CONFIGURATION GUIDE
+// ==========================================
+// Replace this placeholder configuration with the one from your Firebase Console.
+// Make sure it matches the config in js/auth.js!
+const firebaseConfig = {
+  apiKey: "AIzaSyARImX7Uh8cPNDPbaAbemAI0Wyb_7GsgwA",
+  authDomain: "frominvest-ag-portal.firebaseapp.com",
+  projectId: "frominvest-ag-portal",
+  storageBucket: "frominvest-ag-portal.firebasestorage.app",
+  messagingSenderId: "743145142462",
+  appId: "1:743145142462:web:488dc651c601d9cc0b86ef",
+  measurementId: "G-VX4WM17W9Z"
+};
+
+// Initialize
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// Default Administrator Email Address
+const ADMIN_EMAIL = "info@frominvest-ag.com";
+
+let allUsers = [];
+let selectedUserId = null;
+let unsubscribeSelected = null;
+
+const formatCurrency = (val) => {
+  return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(val);
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  const overlay = document.getElementById('authOverlay');
+
+  // ==========================================
+  // ---- 1. SECURITY AUTHORIZATION CHECK ----
+  // ==========================================
+  onAuthStateChanged(auth, async (user) => {
+    if (user && user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+      // User is authorized admin
+      overlay.style.display = 'none';
+      loadUsers();
+    } else {
+      // Unauthorized user or guest
+      const title = overlay.querySelector('h2');
+      const desc = overlay.querySelector('p');
+      if (title) title.textContent = "Zugriff verweigert";
+      if (desc) desc.textContent = "Sie haben keine Administratorrechte für dieses Portal. Weiterleitung...";
+      setTimeout(() => {
+        window.location.href = 'login.html';
+      }, 2500);
+    }
+  });
+
+  // ==========================================
+  // ---- 2. LOAD DIRECTORY OF USERS ----
+  // ==========================================
+  const loadUsers = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, "users"));
+      allUsers = [];
+      querySnapshot.forEach((docSnap) => {
+        allUsers.push({ id: docSnap.id, ...docSnap.data() });
+      });
+      renderUserList();
+    } catch (error) {
+      alert("Fehler beim Laden der Benutzerdaten: " + error.message);
+    }
+  };
+
+  const renderUserList = () => {
+    const container = document.getElementById('userListContainer');
+    container.innerHTML = '';
+
+    if (allUsers.length === 0) {
+      container.innerHTML = '<div style="padding: 20px; text-align: center; color: #94a3b8;">Keine registrierten Kunden gefunden.</div>';
+      return;
+    }
+
+    allUsers.forEach(u => {
+      const fullName = (u.firstName && u.lastName) ? `${u.firstName} ${u.lastName}` : 'Unvollständiges Profil';
+      const div = document.createElement('div');
+      div.className = 'admin-user-item';
+      div.innerHTML = `
+        <div class="admin-user-name">${fullName}</div>
+        <div class="admin-user-email">${u.email}</div>
+      `;
+      div.addEventListener('click', () => {
+        document.querySelectorAll('.admin-user-item').forEach(el => el.classList.remove('active'));
+        div.classList.add('active');
+        selectUser(u.id);
+      });
+      container.appendChild(div);
+    });
+  };
+
+  // ==========================================
+  // ---- 3. SELECT AND LISTEN TO A USER ----
+  // ==========================================
+  const selectUser = (uid) => {
+    selectedUserId = uid;
+    document.getElementById('emptyMain').style.display = 'none';
+    document.getElementById('adminMain').style.display = 'block';
+
+    if (unsubscribeSelected) {
+      unsubscribeSelected();
+    }
+
+    // Bind Firestore listener to select user profile document
+    unsubscribeSelected = onSnapshot(doc(db, "users", uid), (docSnap) => {
+      if (docSnap.exists()) {
+        const userData = docSnap.data();
+        populateForms(uid, userData);
+        renderPortfolio(userData.portfolio || []);
+      }
+    });
+  };
+
+  const populateForms = (uid, data) => {
+    const fullName = (data.firstName && data.lastName) ? `${data.firstName} ${data.lastName}` : 'Kunde';
+    document.getElementById('selUserName').textContent = fullName;
+    document.getElementById('selUserId').textContent = uid;
+
+    document.getElementById('editFirstName').value = data.firstName || '';
+    document.getElementById('editLastName').value = data.lastName || '';
+    document.getElementById('editBirthDate').value = data.birthDate || '';
+    document.getElementById('editEmail').value = data.email || '';
+    document.getElementById('editPhone').value = data.phone || '';
+  };
+
+  // Render portfolio details
+  const renderPortfolio = (portfolio) => {
+    const list = document.getElementById('adminPortfolioList');
+    list.innerHTML = '';
+
+    if (portfolio.length === 0) {
+      list.innerHTML = '<div class="admin-portfolio-item" style="color: #64748b; justify-content: center;">Keine aktiven Anlagen hinterlegt.</div>';
+      return;
+    }
+
+    portfolio.forEach((item, index) => {
+      const amountNum = parseFloat(item.amount) || 0;
+      const div = document.createElement('div');
+      div.className = 'admin-portfolio-item';
+      div.innerHTML = `
+        <div>
+          <strong>${item.bank || 'Bank'}</strong> - ${item.type || 'Festgeld'}<br>
+          <small style="color: #64748b; font-size: 13px;">
+            ${formatCurrency(amountNum)} @ ${item.yield || 0}% p.a. (${item.months || 0} Monate)
+          </small><br>
+          <small style="color: #94a3b8; font-size: 11px;">
+            Start: ${item.startDate || '—'} | Ende: ${item.endDate || '—'}
+          </small>
+        </div>
+        <button class="btn-admin danger delete-btn" data-index="${index}">Löschen</button>
+      `;
+      list.appendChild(div);
+    });
+
+    // Wire Delete actions
+    list.querySelectorAll('.delete-btn').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        const idx = e.target.getAttribute('data-index');
+        if (confirm("Möchten Sie diese Anlage wirklich dauerhaft aus dem Portfolio löschen?")) {
+          portfolio.splice(idx, 1);
+          try {
+            await setDoc(doc(db, "users", selectedUserId), { portfolio: portfolio }, { merge: true });
+          } catch (error) {
+            alert("Fehler beim Löschen der Anlage: " + error.message);
+          }
+        }
+      });
+    });
+  };
+
+  // ==========================================
+  // ---- 4. PROFILE MODIFICATIONS ----
+  // ==========================================
+  const adminProfileForm = document.getElementById('adminProfileForm');
+  if (adminProfileForm) {
+    adminProfileForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!selectedUserId) return;
+
+      const fName = document.getElementById('editFirstName').value.trim();
+      const lName = document.getElementById('editLastName').value.trim();
+      const bDate = document.getElementById('editBirthDate').value;
+      const phone = document.getElementById('editPhone').value.trim();
+      const saveMsg = document.getElementById('profSaveMsg');
+
+      try {
+        await setDoc(doc(db, "users", selectedUserId), {
+          firstName: fName,
+          lastName: lName,
+          birthDate: bDate,
+          phone: phone
+        }, { merge: true });
+
+        saveMsg.textContent = "Erfolgreich gespeichert!";
+        setTimeout(() => { saveMsg.textContent = ""; }, 3000);
+      } catch (error) {
+        alert("Fehler beim Speichern: " + error.message);
+      }
+    });
+  }
+
+  // ==========================================
+  // ---- 5. ADD INVESTMENT TO USER ----
+  // ==========================================
+  const adminAddInvForm = document.getElementById('adminAddInvForm');
+  if (adminAddInvForm) {
+    adminAddInvForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!selectedUserId) return;
+
+      // Get user document directly to retrieve the latest portfolio array
+      const userRef = doc(db, "users", selectedUserId);
+      let currentPortfolio = [];
+      try {
+        const userSnap = await getDoc(userRef);
+        if (userSnap.exists()) {
+          currentPortfolio = userSnap.data().portfolio || [];
+        }
+      } catch (err) {
+        console.error("Error reading user portfolio:", err);
+      }
+
+      const newInv = {
+        bank: document.getElementById('invBank').value.trim(),
+        type: document.getElementById('invType').value.trim(),
+        amount: document.getElementById('invAmount').value.trim(),
+        yield: document.getElementById('invYield').value.trim(),
+        startDate: document.getElementById('invStart').value,
+        endDate: document.getElementById('invEnd').value,
+        months: document.getElementById('invMonths').value.trim()
+      };
+
+      currentPortfolio.push(newInv);
+
+      try {
+        await setDoc(userRef, { portfolio: currentPortfolio }, { merge: true });
+        adminAddInvForm.reset();
+        alert("Anlage wurde erfolgreich hinzugefügt!");
+      } catch (error) {
+        alert("Fehler beim Hinzufügen der Anlage: " + error.message);
+      }
+    });
+  }
+
+  // ==========================================
+  // ---- 6. PASSWORD RESET LINK SENDER ----
+  // ==========================================
+  const btnResetPassword = document.getElementById('btnResetPassword');
+  if (btnResetPassword) {
+    btnResetPassword.addEventListener('click', async () => {
+      if (!selectedUserId) return;
+      const email = document.getElementById('editEmail').value;
+      const resetMsg = document.getElementById('resetMsg');
+
+      if (confirm(`Möchten Sie wirklich eine E-Mail zum Zurücksetzen des Passworts an ${email} senden?`)) {
+        try {
+          await sendPasswordResetEmail(auth, email);
+          resetMsg.style.color = "green";
+          resetMsg.textContent = "E-Mail erfolgreich gesendet!";
+        } catch (error) {
+          resetMsg.style.color = "red";
+          resetMsg.textContent = "Fehler: " + error.message;
+        }
+        setTimeout(() => { resetMsg.textContent = ""; }, 4000);
+      }
+    });
+  }
+
+  // ==========================================
+  // ---- 7. LOGOUT ----
+  // ==========================================
+  document.getElementById('adminLogoutBtn').addEventListener('click', () => {
+    signOut(auth).then(() => {
+      window.location.href = 'index.html';
+    });
+  });
+
+});

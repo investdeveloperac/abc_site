@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Festgeldkonto - Übersicht</title>
+
+  <link rel="apple-touch-icon" href="images/logo.svg">
+  <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/portal.css">
+</head>
+<body style="background-color: #f1f5f9; padding: 20px;">
+
+  <div class="cert-container">
+    
+    <!-- Header Block -->
+    <header class="cert-header">
+      <div class="cert-bank-logo" id="certBankLogo">
+        <!-- Dynamically populated or fallback -->
+        <span class="cert-bank-logo-placeholder" id="certBankNameText">BANK</span>
+      </div>
+      <div class="cert-title-wrap">
+        <h1 class="cert-title">Festgeldkonto – Übersicht</h1>
+      </div>
+      <div class="cert-user-info-box">
+        <div class="cert-user-row">
+          <span class="cert-user-label">Kunde</span>
+          <span class="cert-user-value" id="certCustName">—</span>
+        </div>
+        <div class="cert-user-row">
+          <span class="cert-user-label">Kundennummer</span>
+          <span class="cert-user-value" id="certCustNo">—</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Grid -->
+    <div class="cert-grid">
+      
+      <!-- Left Table Grid -->
+      <div class="cert-left-card">
+        <div class="cert-row">
+          <div class="cert-item-label">
+            <div class="cert-item-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            Anlagebetrag
+          </div>
+          <div class="cert-item-value" id="valAnlagebetrag">€ 0,00</div>
+        </div>
+
+        <div class="cert-row">
+          <div class="cert-item-label">
+            <div class="cert-item-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            Laufzeit
+          </div>
+          <div class="cert-item-value" id="valLaufzeit">—</div>
+        </div>
+
+        <div class="cert-row">
+          <div class="cert-item-label">
+            <div class="cert-item-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
+            </div>
+            Verzinsung (p.a.)
+          </div>
+          <div class="cert-item-value" id="valVerzinsung">0,00 %</div>
+        </div>
+
+        <div class="cert-row">
+          <div class="cert-item-label">
+            <div class="cert-item-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.003 9.003 0 1020.945 13H11V3.055z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+              </svg>
+            </div>
+            Zinsausschüttung
+          </div>
+          <div class="cert-item-value">Ende der Laufzeit</div>
+        </div>
+      </div>
+
+      <!-- Right Date Boxes -->
+      <div class="cert-right-card">
+        
+        <div class="cert-date-box">
+          <div class="cert-date-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <div class="cert-date-text-wrap">
+            <span class="cert-date-label">Beginn des Festgeldkontos</span>
+            <span class="cert-date-value" id="valBeginn">—</span>
+            <span class="cert-date-sub" id="valBeginnValuta">(Valuta: —)</span>
+          </div>
+        </div>
+
+        <div class="cert-date-box">
+          <div class="cert-date-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+            </svg>
+          </div>
+          <div class="cert-date-text-wrap">
+            <span class="cert-date-label">Ende der Laufzeit</span>
+            <span class="cert-date-value" id="valEnde">—</span>
+            <span class="cert-date-sub">(Laufzeitende / Valuta)</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Interest Calculation Table -->
+    <div class="cert-table-wrap">
+      <div class="cert-table-header">
+        <span>Ergebnis bei Zinsausschüttung am Ende der Laufzeit</span>
+        <span>Betrag</span>
+      </div>
+      <div class="cert-table-row">
+        <span>Anlagebetrag</span>
+        <span id="tabAnlagebetrag">€ 0,00</span>
+      </div>
+      <div class="cert-table-row">
+        <span id="tabZinsenLabel">Zinsen (0,00% p.a. für 0 Monate)</span>
+        <span id="tabZinsenValue" style="color: var(--success-color); font-weight: 700;">+ € 0,00</span>
+      </div>
+      <div class="cert-table-row total-row">
+        <span>Auszahlungsbetrag am Ende der Laufzeit</span>
+        <span id="tabTotalValue">€ 0,00</span>
+      </div>
+    </div>
+
+    <!-- Info Box -->
+    <div class="cert-info-bar">
+      <div class="cert-info-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+      <div class="cert-info-text">
+        Die Zinsen werden am Ende der Laufzeit gutgeschrieben und gemeinsam mit dem Anlagebetrag ausgezahlt. Es fallen keine Gebühren an.
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="cert-actions">
+      <button class="btn-cert back" onclick="window.location.href='dashboard.html'">← Zurück zum Dashboard</button>
+      <button class="btn-cert print" onclick="window.print()">Dokument drucken / Speichern</button>
+    </div>
+
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getFirestore, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    // REPLACE WITH USER FIREBASE CONFIGURATION
+    const firebaseConfig = {
+      apiKey: "AIzaSyARImX7Uh8cPNDPbaAbemAI0Wyb_7GsgwA",
+      authDomain: "frominvest-ag-portal.firebaseapp.com",
+      projectId: "frominvest-ag-portal",
+      storageBucket: "frominvest-ag-portal.firebasestorage.app",
+      messagingSenderId: "743145142462",
+      appId: "1:743145142462:web:488dc651c601d9cc0b86ef",
+      measurementId: "G-VX4WM17W9Z"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Bank name to workspace logo image mappings
+    const bankLogos = {
+      'deutsche bank': 'images/Deutsche_Bank.png',
+      'commerzbank': 'images/CommerzBank.png',
+      'sparkasse': 'images/sparkasse.png',
+      'postbank': 'images/Postbank.png',
+      'ing': 'images/ING.png',
+      'ing diba': 'images/ING.png',
+      'dkb': 'images/DKB.png',
+      'santander': 'images/Santander.png',
+      'ubs': 'images/UBS_Logo.png'
+    };
+
+    const formatCurrency = (val) => {
+      return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(val);
+    };
+
+    const formatDate = (dateStr) => {
+      if (!dateStr) return '—';
+      const date = new Date(dateStr);
+      return date.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    };
+
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const index = parseInt(urlParams.get('id'));
+
+      if (isNaN(index)) {
+        window.location.href = 'dashboard.html';
+        return;
+      }
+
+      // Fetch user data
+      onSnapshot(doc(db, "users", user.uid), (docSnap) => {
+        if (docSnap.exists()) {
+          const userData = docSnap.data();
+          const portfolio = userData.portfolio || [];
+          const item = portfolio[index];
+
+          if (!item) {
+            window.location.href = 'dashboard.html';
+            return;
+          }
+
+          // Populate Customer details
+          const fullName = (userData.firstName && userData.lastName) ? `${userData.firstName} ${userData.lastName}` : (userData.email || 'Kunde');
+          document.getElementById('certCustName').textContent = fullName;
+          document.getElementById('certCustNo').textContent = user.uid.substring(0, 10).toUpperCase();
+
+          // Dynamic Bank Logo & Brand color
+          const bankNameLower = (item.bank || '').toLowerCase().trim();
+          const logoContainer = document.getElementById('certBankLogo');
+          
+          if (bankLogos[bankNameLower]) {
+            logoContainer.innerHTML = `<img src="${bankLogos[bankNameLower]}" alt="${item.bank}">`;
+          } else {
+            document.getElementById('certBankNameText').textContent = item.bank || 'BANK';
+          }
+
+          // Convert values
+          const amountNum = parseFloat(item.amount) || 0;
+          const yieldNum = parseFloat(item.yield) || 0;
+          const monthsNum = parseInt(item.months) || 0;
+
+          // Calculations
+          const totalInterest = amountNum * (yieldNum / 100) * (monthsNum / 12);
+          const totalPayout = amountNum + totalInterest;
+
+          // Populate table/grid values
+          document.getElementById('valAnlagebetrag').textContent = formatCurrency(amountNum);
+          document.getElementById('valLaufzeit').textContent = `${monthsNum} Monate`;
+          document.getElementById('valVerzinsung').textContent = `${yieldNum.toFixed(2).replace('.', ',')} %`;
+          
+          document.getElementById('valBeginn').textContent = formatDate(item.startDate);
+          document.getElementById('valBeginnValuta').textContent = `(Valuta: ${formatDate(item.startDate)})`;
+          document.getElementById('valEnde').textContent = formatDate(item.endDate);
+
+          // Populate calculations table
+          document.getElementById('tabAnlagebetrag').textContent = formatCurrency(amountNum);
+          document.getElementById('tabZinsenLabel').textContent = `Zinsen (${yieldNum.toFixed(2).replace('.', ',')}% p.a. für ${monthsNum} Monate)`;
+          document.getElementById('tabZinsenValue').textContent = `+ ${formatCurrency(totalInterest)}`;
+          document.getElementById('tabTotalValue').textContent = formatCurrency(totalPayout);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
