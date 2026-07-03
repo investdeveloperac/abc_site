@@ -1171,3 +1171,16 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 768px) {
+  .style-mobile-padding {
+    padding-left: 15px !important;
+    margin-top: 20px;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 20px;
+  }
+  #statsCardLeftPart {
+    border-right: none !important;
+    padding-right: 15px !important;
+  }
+}

@@ -530,7 +530,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const container = document.getElementById('portfolioContainer');
       container.innerHTML = '';
 
+      const premiumStatsCard = document.getElementById('premiumStatsCard');
       if (portfolio.length === 0) {
+        if (premiumStatsCard) premiumStatsCard.style.display = 'none';
         container.innerHTML = `
           <div class="empty-portfolio">
             <div class="empty-icon">
@@ -543,11 +545,16 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
         `;
       } else {
+        if (premiumStatsCard) premiumStatsCard.style.display = 'block';
+        let totalCapital = 0;
+        let totalYield = 0;
         portfolio.forEach((item, index) => {
           const amountNum = parseFloat(item.amount) || 0;
           const yieldNum = parseFloat(item.yield) || 0;
           const monthsNum = parseInt(item.months) || 0;
           const earnedTotal = amountNum * Math.pow(1 + (yieldNum / 100 / 12), monthsNum) - amountNum;
+          totalCapital += amountNum;
+          totalYield += earnedTotal;
 
           const bankNameLower = (item.bank || '').toLowerCase().trim();
           let bankIconHTML = `
@@ -562,6 +569,39 @@ document.addEventListener('DOMContentLoaded', () => {
             bankIconHTML = `
               <div class="bank-icon-box" style="background: white; border: 1px solid #e2e8f0; overflow: hidden; padding: 4px;">
                 <img src="${bankLogos[bankNameLower]}" alt="${item.bank}" style="width: 100%; height: 100%; object-fit: contain;">
+              </div>
+            `;
+          }
+
+          let refAccountHTML = '';
+          if (item.refIban) {
+            const refBankNameLower = (item.refBank || '').toLowerCase().trim();
+            let refBankIconHTML = `
+              <div class="bank-icon-box" style="width: 24px; height: 24px; border-radius: 6px; font-size: 12px; margin-right: 0;">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 12px; height: 12px;">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+              </div>
+            `;
+
+            if (bankLogos[refBankNameLower]) {
+              refBankIconHTML = `
+                <div class="bank-icon-box" style="background: white; border: 1px solid #e2e8f0; overflow: hidden; padding: 2px; width: 24px; height: 24px; border-radius: 6px; margin-right: 0;">
+                  <img src="${bankLogos[refBankNameLower]}" alt="${item.refBank}" style="width: 100%; height: 100%; object-fit: contain;">
+                </div>
+              `;
+            }
+
+            refAccountHTML = `
+              <div style="border-top: 1px dashed #e2e8f0; padding-top: 12px; margin-top: 12px; display: flex; align-items: center; justify-content: space-between;">
+                <span style="font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em;">Referenzkonto</span>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  ${refBankIconHTML}
+                  <div style="text-align: right;">
+                    <span style="font-size: 13px; font-weight: 700; color: #334155; display: block; line-height: 1.2;">${item.refBank}</span>
+                    <span style="font-size: 11px; font-weight: 600; color: #64748b; font-family: monospace; line-height: 1.2;">${item.refIban}</span>
+                  </div>
+                </div>
               </div>
             `;
           }
@@ -654,6 +694,8 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
             </div>
 
+            ${refAccountHTML}
+
             <div class="card-footer-row">
               <span>Inhaber: ${data.firstName || ''} ${data.lastName || ''}${item.coOwners ? ', ' + item.coOwners : ''}</span>
               <span style="color: var(--primary-color); font-weight: bold;">Details & Vertrag →</span>
@@ -667,6 +709,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
           container.appendChild(card);
         });
+
+        // Update statistics cards
+        const statTotalCapital = document.getElementById('statTotalCapital');
+        const statTotalYield = document.getElementById('statTotalYield');
+        const statTotalBalance = document.getElementById('statTotalBalance');
+        const statReturnRate = document.getElementById('statReturnRate');
+        
+        const ratioBarCapital = document.getElementById('ratioBarCapital');
+        const ratioBarYield = document.getElementById('ratioBarYield');
+        const ratioPercentCapital = document.getElementById('ratioPercentCapital');
+        const ratioPercentYield = document.getElementById('ratioPercentYield');
+
+        const totalMaturity = totalCapital + totalYield;
+
+        if (statTotalCapital) statTotalCapital.textContent = formatCurrency(totalCapital);
+        if (statTotalYield) statTotalYield.textContent = '+ ' + formatCurrency(totalYield);
+        if (statTotalBalance) statTotalBalance.textContent = formatCurrency(totalMaturity);
+        
+        if (statReturnRate && totalCapital > 0) {
+          const returnRate = (totalYield / totalCapital) * 100;
+          statReturnRate.textContent = returnRate.toFixed(2).replace('.', ',') + '%';
+        }
+
+        if (totalMaturity > 0) {
+          const capPercent = (totalCapital / totalMaturity) * 100;
+          const yldPercent = (totalYield / totalMaturity) * 100;
+
+          if (ratioBarCapital) ratioBarCapital.style.width = capPercent + '%';
+          if (ratioBarYield) ratioBarYield.style.width = yldPercent + '%';
+          
+          if (ratioPercentCapital) ratioPercentCapital.textContent = capPercent.toFixed(1).replace('.', ',') + '%';
+          if (ratioPercentYield) ratioPercentYield.textContent = yldPercent.toFixed(1).replace('.', ',') + '%';
+        }
       }
     };
 

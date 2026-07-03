@@ -31,6 +31,7 @@ const ADMIN_EMAIL = "info@frominvest-ag.com";
 
 let allUsers = [];
 let selectedUserId = null;
+let editingInvIndex = null;
 let unsubscribeSelected = null;
 
 const formatCurrency = (val) => {
@@ -108,6 +109,23 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   const selectUser = (uid) => {
     selectedUserId = uid;
+    editingInvIndex = null;
+
+    // Reset add investment form and labels
+    const addForm = document.getElementById('adminAddInvForm');
+    if (addForm) {
+      addForm.reset();
+      addForm.previousElementSibling.textContent = 'Neue Anlage hinzufügen';
+    }
+    const submitBtn = document.getElementById('btnSubmitInv');
+    if (submitBtn) {
+      submitBtn.textContent = 'Anlage dem Kunden hinzufügen';
+    }
+    const cancelBtn = document.getElementById('btnCancelEditInv');
+    if (cancelBtn) {
+      cancelBtn.style.display = 'none';
+    }
+
     document.getElementById('emptyMain').style.display = 'none';
     document.getElementById('adminMain').style.display = 'block';
     document.getElementById('createUserPanel').style.display = 'none';
@@ -159,12 +177,49 @@ document.addEventListener('DOMContentLoaded', () => {
             ${formatCurrency(amountNum)} @ ${item.yield || 0}% p.a. (${item.months || 0} Monate)
           </small><br>
           <small style="color: #94a3b8; font-size: 11px;">
-            Start: ${item.startDate || '—'} | Ende: ${item.endDate || '—'}${item.coOwners ? ` | Mitinhaber: ${item.coOwners}` : ''}
+            Start: ${item.startDate || '—'} | Ende: ${item.endDate || '—'}${item.coOwners ? ` | Mitinhaber: ${item.coOwners}` : ''}${item.refIban ? ` | Ref: ${item.refBank || '—'} (${item.refIban})` : ''}
           </small>
         </div>
-        <button class="btn-admin danger delete-btn" data-index="${index}">Löschen</button>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button class="btn-admin edit-btn" data-index="${index}" style="background: #002e6c;">Bearbeiten</button>
+          <button class="btn-admin danger delete-btn" data-index="${index}">Löschen</button>
+        </div>
       `;
       list.appendChild(div);
+    });
+
+    // Wire Edit actions
+    list.querySelectorAll('.edit-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const idx = parseInt(e.target.getAttribute('data-index'));
+        const item = portfolio[idx];
+        if (!item) return;
+
+        editingInvIndex = idx;
+
+        // Change Title & Button label
+        const formContainer = document.getElementById('adminAddInvForm');
+        if (formContainer) {
+          formContainer.previousElementSibling.textContent = 'Anlage bearbeiten';
+          document.getElementById('btnSubmitInv').textContent = 'Anlage aktualisieren';
+          document.getElementById('btnCancelEditInv').style.display = 'inline-block';
+          
+          // Scroll to form smoothly
+          formContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Populate fields
+        document.getElementById('invBank').value = item.bank || '';
+        document.getElementById('invType').value = item.type || '';
+        document.getElementById('invAmount').value = item.amount || '';
+        document.getElementById('invYield').value = item.yield || '';
+        document.getElementById('invStart').value = item.startDate || '';
+        document.getElementById('invEnd').value = item.endDate || '';
+        document.getElementById('invMonths').value = item.months || '';
+        document.getElementById('invCoOwners').value = item.coOwners || '';
+        document.getElementById('invRefBank').value = item.refBank || '';
+        document.getElementById('invRefIban').value = item.refIban || '';
+      });
     });
 
     // Wire Delete actions
@@ -243,18 +298,50 @@ document.addEventListener('DOMContentLoaded', () => {
         startDate: document.getElementById('invStart').value,
         endDate: document.getElementById('invEnd').value,
         months: document.getElementById('invMonths').value.trim(),
-        coOwners: document.getElementById('invCoOwners').value.trim()
+        coOwners: document.getElementById('invCoOwners').value.trim(),
+        refBank: document.getElementById('invRefBank').value.trim(),
+        refIban: document.getElementById('invRefIban').value.trim()
       };
 
-      currentPortfolio.push(newInv);
+      const isEditing = editingInvIndex !== null;
+      if (isEditing) {
+        currentPortfolio[editingInvIndex] = newInv;
+      } else {
+        currentPortfolio.push(newInv);
+      }
 
       try {
         await setDoc(userRef, { portfolio: currentPortfolio }, { merge: true });
         adminAddInvForm.reset();
-        alert("Anlage wurde erfolgreich hinzugefügt!");
+        
+        if (isEditing) {
+          editingInvIndex = null;
+          adminAddInvForm.previousElementSibling.textContent = 'Neue Anlage hinzufügen';
+          document.getElementById('btnSubmitInv').textContent = 'Anlage dem Kunden hinzufügen';
+          document.getElementById('btnCancelEditInv').style.display = 'none';
+          alert("Anlage wurde erfolgreich aktualisiert!");
+        } else {
+          alert("Anlage wurde erfolgreich hinzugefügt!");
+        }
       } catch (error) {
-        alert("Fehler beim Hinzufügen der Anlage: " + error.message);
+        alert("Fehler beim Speichern: " + error.message);
       }
+    });
+  }
+
+  const btnCancelEditInv = document.getElementById('btnCancelEditInv');
+  if (btnCancelEditInv) {
+    btnCancelEditInv.addEventListener('click', () => {
+      editingInvIndex = null;
+      if (adminAddInvForm) {
+        adminAddInvForm.reset();
+        adminAddInvForm.previousElementSibling.textContent = 'Neue Anlage hinzufügen';
+      }
+      const submitBtn = document.getElementById('btnSubmitInv');
+      if (submitBtn) {
+        submitBtn.textContent = 'Anlage dem Kunden hinzufügen';
+      }
+      btnCancelEditInv.style.display = 'none';
     });
   }
 

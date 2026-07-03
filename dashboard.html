@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/portal.css">
 </head>
+
 <body>
 
   <div class="dashboard-wrapper">
@@ -24,43 +26,50 @@
         </div>
       </div>
 
-      <div id="impersonateBanner" style="display: none; margin: 16px; padding: 16px; background-color: rgba(239, 68, 68, 0.1); border: 1px dashed #ef4444; border-radius: 12px; text-align: center; color: #fca5a5;">
+      <div id="impersonateBanner"
+        style="display: none; margin: 16px; padding: 16px; background-color: rgba(239, 68, 68, 0.1); border: 1px dashed #ef4444; border-radius: 12px; text-align: center; color: #fca5a5;">
         <span style="font-size: 13px; font-weight: 700; display: block; margin-bottom: 8px;">Admin-Vorschau</span>
-        <button id="btnExitImpersonate" class="btn-admin danger" style="width: 100%; padding: 6px 12px; font-size: 12px; border-radius: 6px; border: none; font-weight: 600; cursor: pointer;">
+        <button id="btnExitImpersonate" class="btn-admin danger"
+          style="width: 100%; padding: 6px 12px; font-size: 12px; border-radius: 6px; border: none; font-weight: 600; cursor: pointer;">
           Zurück zum Admin
         </button>
       </div>
-      
+
       <nav class="sidebar-menu">
         <button class="menu-item active" data-tab="accounts">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
           </svg>
           Meine Konten
         </button>
         <button class="menu-item" data-tab="settings">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.43l-1.003.828c-.293.241-.438.613-.43.992a7.723 7.723 0 010 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.43l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.991l-1.004-.827a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.28z" />
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.43l-1.003.828c-.293.241-.438.613-.43.992a7.723 7.723 0 010 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.43l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.991l-1.004-.827a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.28z" />
             <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
           </svg>
-          Einstellungen
+          Mein Profil
         </button>
         <button class="menu-item" data-tab="verwaltung" id="adminVerwaltungTab" style="display: none;">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
           </svg>
           Verwaltung
         </button>
       </nav>
-      
+
       <div class="sidebar-footer">
         <div class="user-profile-info">
           <span class="user-profile-name" id="sidebarUserName">—</span>
           <span class="user-profile-email" id="sidebarUserEmail">—</span>
         </div>
         <button id="logoutBtn" class="btn-logout-sidebar">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
           </svg>
           Abmelden
         </button>
@@ -69,28 +78,28 @@
 
     <!-- Main Content Area -->
     <main class="main-content">
-      
       <!-- Content Header (Meine Festgeld-Konten) -->
       <header class="content-header">
         <h1 class="content-title">Meine Festgeld-Konten</h1>
-        <p class="content-subtitle">Übersicht Ihrer Anlagen bei der FromInvest AG</p>
+        <p class="content-subtitle">Übersicht Ihrer Anlagen</p>
       </header>
 
       <!-- Content Body -->
       <section class="content-body">
-        
+
         <!-- Tab: Meine Konten Panel -->
         <div class="tab-panel active" id="accountsPanel">
-          
+
           <!-- Personal Data Card -->
-          <div class="profile-card">
+          <div class="profile-card" style="margin-top: 30px;">
             <div class="profile-card-title">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
               Persönliche Daten
             </div>
-            
+
             <div class="profile-grid">
               <div class="profile-field">
                 <span class="profile-field-label">Vorname</span>
@@ -110,18 +119,93 @@
               </div>
             </div>
           </div>
+          <!-- Portfolio Summary - Premium Wealth Overview Card -->
+          <div class="profile-card" id="premiumStatsCard"
+            style="display: none; padding: 30px; border-radius: 16px; border: 1px solid var(--border-color); background: white; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.02); position: relative; margin-bottom: 30px;">
+            <div class="row align-items-center">
+              <!-- Left Column: Large Net Asset Value -->
+              <div class="col-12 col-md-6" style="border-right: 1px solid #f1f5f9; padding-right: 30px;"
+                id="statsCardLeftPart">
+                <span
+                  style="font-size: 11px; font-weight: 700; color: #64748b; letter-spacing: 0.1em; text-transform: uppercase; display: block; margin-bottom: 6px;">
+                  Portfoliowert bei Fälligkeit
+                </span>
+                <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;">
+                  <span id="statTotalBalance"
+                    style="font-size: 38px; font-weight: 800; color: #0f172a; letter-spacing: -0.02em;">€ 0,00</span>
+                  <span id="statReturnRateBadge"
+                    style="background-color: #dcfce7; color: #15803d; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 20px; display: inline-flex; align-items: center; gap: 4px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                      style="width: 14px; height: 14px;">
+                      <path fill-rule="evenodd"
+                        d="M12.577 4.878a.75.75 0 01.919-.53l4.75 1.5a.75.75 0 01.53.919l-1.5 4.75a.75.75 0 11-1.428-.452l.797-2.524L11.5 13.793l-3.22-3.22-5.75 5.75a.75.75 0 11-1.06-1.06l6.28-6.28 3.22 3.22 4.417-4.417-2.524-.797a.75.75 0 01-.53-.919z"
+                        clip-rule="evenodd" />
+                    </svg>
+                    <span id="statReturnRate">0,00%</span>
+                  </span>
+                </div>
+                <p style="color: #94a3b8; font-size: 12px; margin-top: 8px; margin-bottom: 0;">
+                  Berechnet auf Basis der monatlichen Zinseszinseffekte aller aktiven Festgeldanlagen.
+                </p>
+              </div>
+
+              <!-- Right Column: Detail Breakdown -->
+              <div class="col-12 col-md-6 style-mobile-padding" style="padding-left: 30px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                  <div>
+                    <span
+                      style="font-size: 11px; font-weight: 600; color: #64748b; text-transform: uppercase; display: block; margin-bottom: 4px;">Investiertes
+                      Kapital</span>
+                    <span id="statTotalCapital" style="font-size: 18px; font-weight: 700; color: #334155;">€ 0,00</span>
+                  </div>
+                  <div style="text-align: right;">
+                    <span
+                      style="font-size: 11px; font-weight: 600; color: #64748b; text-transform: uppercase; display: block; margin-bottom: 4px; color: var(--success-text);">Zinszuwachs
+                      (Gesamt)</span>
+                    <span id="statTotalYield" style="font-size: 18px; font-weight: 700; color: var(--success-text);">+ €
+                      0,00</span>
+                  </div>
+                </div>
+
+                <!-- Visual Ratio Bar -->
+                <div
+                  style="height: 8px; width: 100%; background-color: #f1f5f9; border-radius: 4px; overflow: hidden; display: flex; margin-bottom: 15px;">
+                  <div id="ratioBarCapital"
+                    style="height: 100%; background-color: #002e6c; width: 0%; transition: width 0.6s ease;"></div>
+                  <div id="ratioBarYield"
+                    style="height: 100%; background-color: var(--success-color); width: 0%; transition: width 0.6s ease;">
+                  </div>
+                </div>
+
+                <!-- Legend -->
+                <div style="display: flex; gap: 20px; font-size: 11px; font-weight: 600; color: #64748b;">
+                  <span style="display: flex; align-items: center; gap: 6px;">
+                    <span
+                      style="width: 8px; height: 8px; border-radius: 50%; background-color: #002e6c; display: inline-block;"></span>
+                    Anlagebetrag (<span id="ratioPercentCapital">0%</span>)
+                  </span>
+                  <span style="display: flex; align-items: center; gap: 6px;">
+                    <span
+                      style="width: 8px; height: 8px; border-radius: 50%; background-color: var(--success-color); display: inline-block;"></span>
+                    Zinsanteil (<span id="ratioPercentYield">0%</span>)
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <!-- Dynamic Investment Cards Container -->
           <div id="portfolioContainer">
             <!-- Populated via js/auth.js -->
           </div>
 
+
         </div>
 
         <!-- Tab: Einstellungen Panel -->
         <div class="tab-panel" id="settingsPanel">
           <div class="row">
-            
+
             <div class="col-12 col-lg-7">
               <!-- Edit Profile Card -->
               <div class="profile-card">
@@ -146,7 +230,8 @@
                     <label>Telefonnummer</label>
                     <input type="text" id="editPhone" class="form-control">
                   </div>
-                  <button type="submit" class="btn-submit" style="background: var(--dark-bg); max-width: 250px;">Profil Speichern</button>
+                  <button type="submit" class="btn-submit" style="background: var(--dark-bg); max-width: 250px;">Profil
+                    Speichern</button>
                 </form>
               </div>
 
@@ -157,7 +242,8 @@
                 <form id="passwordForm">
                   <div class="form-group">
                     <label>Neues Passwort</label>
-                    <input type="password" id="newPassword" class="form-control" placeholder="Mindestens 6 Zeichen" required minlength="6">
+                    <input type="password" id="newPassword" class="form-control" placeholder="Mindestens 6 Zeichen"
+                      required minlength="6">
                   </div>
                   <button type="submit" class="btn-submit" style="max-width: 250px;">Passwort Aktualisieren</button>
                 </form>
@@ -173,4 +259,5 @@
 
   <script type="module" src="js/auth.js"></script>
 </body>
+
 </html>
