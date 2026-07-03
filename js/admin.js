@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, onAuthStateChanged, signOut, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signOut, sendPasswordResetEmail, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getFirestore, collection, getDocs, doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 // ==========================================
@@ -21,6 +21,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+
+// Secondary Firebase Auth instance for user creation to avoid logging out admin
+const secondaryApp = initializeApp(firebaseConfig, "SecondaryApp");
+const secondaryAuth = getAuth(secondaryApp);
 
 // Default Administrator Email Address
 const ADMIN_EMAIL = "info@frominvest-ag.com";
@@ -106,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     selectedUserId = uid;
     document.getElementById('emptyMain').style.display = 'none';
     document.getElementById('adminMain').style.display = 'block';
+    document.getElementById('createUserPanel').style.display = 'none';
 
     if (unsubscribeSelected) {
       unsubscribeSelected();
@@ -154,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ${formatCurrency(amountNum)} @ ${item.yield || 0}% p.a. (${item.months || 0} Monate)
           </small><br>
           <small style="color: #94a3b8; font-size: 11px;">
-            Start: ${item.startDate || '—'} | Ende: ${item.endDate || '—'}
+            Start: ${item.startDate || '—'} | Ende: ${item.endDate || '—'}${item.coOwners ? ` | Mitinhaber: ${item.coOwners}` : ''}
           </small>
         </div>
         <button class="btn-admin danger delete-btn" data-index="${index}">Löschen</button>
@@ -237,7 +242,8 @@ document.addEventListener('DOMContentLoaded', () => {
         yield: document.getElementById('invYield').value.trim(),
         startDate: document.getElementById('invStart').value,
         endDate: document.getElementById('invEnd').value,
-        months: document.getElementById('invMonths').value.trim()
+        months: document.getElementById('invMonths').value.trim(),
+        coOwners: document.getElementById('invCoOwners').value.trim()
       };
 
       currentPortfolio.push(newInv);
@@ -272,6 +278,148 @@ document.addEventListener('DOMContentLoaded', () => {
           resetMsg.textContent = "Fehler: " + error.message;
         }
         setTimeout(() => { resetMsg.textContent = ""; }, 4000);
+      }
+    });
+  }
+
+  const btnImpersonateUser = document.getElementById('btnImpersonateUser');
+  if (btnImpersonateUser) {
+    btnImpersonateUser.addEventListener('click', () => {
+      if (!selectedUserId) return;
+      sessionStorage.setItem('impersonateUid', selectedUserId);
+      sessionStorage.setItem('otpVerified', 'true');
+      window.location.href = 'dashboard.html';
+    });
+  }
+
+  // ==========================================
+  // ---- 6.5. CREATE USER FLOW ----
+  // ==========================================
+  const generateRandomPassword = () => {
+    const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+    let pass = "";
+    for (let i = 0; i < 12; i++) {
+      pass += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return pass;
+  };
+
+  const btnCreateUserView = document.getElementById('btnCreateUserView');
+  const createUserPanel = document.getElementById('createUserPanel');
+  const adminMain = document.getElementById('adminMain');
+  const emptyMain = document.getElementById('emptyMain');
+  const adminCreateUserForm = document.getElementById('adminCreateUserForm');
+  const btnGeneratePassword = document.getElementById('btnGeneratePassword');
+  const btnCancelCreateUser = document.getElementById('btnCancelCreateUser');
+  const createErrorMsg = document.getElementById('createErrorMsg');
+  const createSuccessMsg = document.getElementById('createSuccessMsg');
+
+  const showCreateError = (msg) => {
+    createErrorMsg.textContent = msg;
+    createErrorMsg.style.display = 'block';
+    createSuccessMsg.style.display = 'none';
+  };
+
+  const showCreateSuccess = (msg) => {
+    createSuccessMsg.textContent = msg;
+    createSuccessMsg.style.display = 'block';
+    createErrorMsg.style.display = 'none';
+  };
+
+  if (btnCreateUserView) {
+    btnCreateUserView.addEventListener('click', () => {
+      // Deselect user list active state
+      document.querySelectorAll('.admin-user-item').forEach(el => el.classList.remove('active'));
+      selectedUserId = null;
+      if (unsubscribeSelected) {
+        unsubscribeSelected();
+        unsubscribeSelected = null;
+      }
+
+      // Toggle views
+      emptyMain.style.display = 'none';
+      adminMain.style.display = 'none';
+      createUserPanel.style.display = 'block';
+
+      // Reset form
+      if (adminCreateUserForm) {
+        adminCreateUserForm.reset();
+      }
+      createErrorMsg.style.display = 'none';
+      createSuccessMsg.style.display = 'none';
+    });
+  }
+
+  if (btnGeneratePassword) {
+    btnGeneratePassword.addEventListener('click', () => {
+      const passField = document.getElementById('createPassword');
+      if (passField) {
+        const generated = generateRandomPassword();
+        passField.value = generated;
+      }
+    });
+  }
+
+  if (btnCancelCreateUser) {
+    btnCancelCreateUser.addEventListener('click', () => {
+      createUserPanel.style.display = 'none';
+      emptyMain.style.display = 'flex';
+      if (adminCreateUserForm) {
+        adminCreateUserForm.reset();
+      }
+    });
+  }
+
+  if (adminCreateUserForm) {
+    adminCreateUserForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const firstName = document.getElementById('createFirstName').value.trim();
+      const lastName = document.getElementById('createLastName').value.trim();
+      const birthDate = document.getElementById('createBirthDate').value;
+      const email = document.getElementById('createEmail').value.trim();
+      const phone = document.getElementById('createPhone').value.trim();
+      const password = document.getElementById('createPassword').value.trim();
+      const btn = document.getElementById('btnSubmitCreateUser');
+
+      btn.disabled = true;
+      btn.textContent = "Erstellt...";
+      createErrorMsg.style.display = 'none';
+      createSuccessMsg.style.display = 'none';
+
+      try {
+        // Register in secondary auth
+        const userCredential = await createUserWithEmailAndPassword(secondaryAuth, email, password);
+        const user = userCredential.user;
+
+        // Write user profile to Firestore
+        await setDoc(doc(db, "users", user.uid), {
+          firstName: firstName,
+          lastName: lastName,
+          birthDate: birthDate,
+          email: email,
+          phone: phone,
+          portfolio: []
+        });
+
+        // Sign out of secondary auth session to clean up
+        await signOut(secondaryAuth);
+
+        showCreateSuccess(`Konto erfolgreich erstellt für ${firstName} ${lastName}!`);
+        adminCreateUserForm.reset();
+
+        // Reload user list in sidebar
+        await loadUsers();
+
+        setTimeout(() => {
+          createUserPanel.style.display = 'none';
+          emptyMain.style.display = 'flex';
+        }, 3000);
+
+      } catch (error) {
+        showCreateError("Fehler beim Erstellen des Benutzers: " + error.message);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Kunden registrieren";
       }
     });
   }

@@ -29,6 +29,10 @@
           <span class="cert-user-label">Kunde</span>
           <span class="cert-user-value" id="certCustName">—</span>
         </div>
+        <div class="cert-user-row" id="certCoOwnersRow" style="display: none;">
+          <span class="cert-user-label">Weitere Inhaber</span>
+          <span class="cert-user-value" id="certCoOwners">—</span>
+        </div>
         <div class="cert-user-row">
           <span class="cert-user-label">Kundennummer</span>
           <span class="cert-user-value" id="certCustNo">—</span>
@@ -144,6 +148,29 @@
       </div>
     </div>
 
+    <!-- Monthly Interest Table (Zinstabelle) -->
+    <div class="admin-card" style="margin-top: 30px; padding: 24px; border: 1px solid var(--border-color); border-radius: 12px; background: white; margin-bottom: 30px;">
+      <div style="font-size: 16px; font-weight: 700; color: #002e6c; margin-bottom: 20px; border-bottom: 2px solid #002e6c; padding-bottom: 10px;">
+        Monatlicher Zinsentwicklungsplan (Zinstabelle)
+      </div>
+      <div style="overflow-x: auto;">
+        <table class="table" style="width: 100%; font-size: 14px; text-align: left; border-collapse: collapse; margin-bottom: 0;">
+          <thead>
+            <tr style="border-bottom: 2px solid var(--border-color); color: var(--text-light); font-weight: 600;">
+              <th style="padding: 12px 10px;">Monat</th>
+              <th style="padding: 12px 10px;">Datum (Wertstellung)</th>
+              <th style="padding: 12px 10px;">Anfangsbestand</th>
+              <th style="padding: 12px 10px; color: var(--success-text);">Zinszuwachs</th>
+              <th style="padding: 12px 10px;">Endbestand</th>
+            </tr>
+          </thead>
+          <tbody id="zinstabelleBody">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
     <!-- Info Box -->
     <div class="cert-info-bar">
       <div class="cert-info-icon">
@@ -222,7 +249,12 @@
       }
 
       // Fetch user data
-      onSnapshot(doc(db, "users", user.uid), (docSnap) => {
+      const ADMIN_EMAIL = "info@frominvest-ag.com";
+      const isAdminUser = user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
+      const impersonateUid = sessionStorage.getItem('impersonateUid');
+      const targetUid = (impersonateUid && isAdminUser) ? impersonateUid : user.uid;
+
+      onSnapshot(doc(db, "users", targetUid), (docSnap) => {
         if (docSnap.exists()) {
           const userData = docSnap.data();
           const portfolio = userData.portfolio || [];
@@ -236,7 +268,17 @@
           // Populate Customer details
           const fullName = (userData.firstName && userData.lastName) ? `${userData.firstName} ${userData.lastName}` : (userData.email || 'Kunde');
           document.getElementById('certCustName').textContent = fullName;
-          document.getElementById('certCustNo').textContent = user.uid.substring(0, 10).toUpperCase();
+          document.getElementById('certCustNo').textContent = targetUid.substring(0, 10).toUpperCase();
+
+          // Populate Co-owners if any
+          const coOwnersRow = document.getElementById('certCoOwnersRow');
+          const coOwnersVal = document.getElementById('certCoOwners');
+          if (item.coOwners && coOwnersRow && coOwnersVal) {
+            coOwnersVal.textContent = item.coOwners;
+            coOwnersRow.style.display = 'flex';
+          } else if (coOwnersRow) {
+            coOwnersRow.style.display = 'none';
+          }
 
           // Dynamic Bank Logo & Brand color
           const bankNameLower = (item.bank || '').toLowerCase().trim();
@@ -254,7 +296,7 @@
           const monthsNum = parseInt(item.months) || 0;
 
           // Calculations
-          const totalInterest = amountNum * (yieldNum / 100) * (monthsNum / 12);
+          const totalInterest = amountNum * Math.pow(1 + (yieldNum / 100 / 12), monthsNum) - amountNum;
           const totalPayout = amountNum + totalInterest;
 
           // Populate table/grid values
@@ -271,6 +313,38 @@
           document.getElementById('tabZinsenLabel').textContent = `Zinsen (${yieldNum.toFixed(2).replace('.', ',')}% p.a. für ${monthsNum} Monate)`;
           document.getElementById('tabZinsenValue').textContent = `+ ${formatCurrency(totalInterest)}`;
           document.getElementById('tabTotalValue').textContent = formatCurrency(totalPayout);
+
+          // Populate monthly interest table (Zinstabelle)
+          const zinstabelleBody = document.getElementById('zinstabelleBody');
+          if (zinstabelleBody) {
+            zinstabelleBody.innerHTML = '';
+            
+            let currentBalance = amountNum;
+            const monthlyRate = (yieldNum / 100) / 12;
+            const baseDate = item.startDate ? new Date(item.startDate) : new Date();
+            
+            for (let m = 1; m <= monthsNum; m++) {
+              const startBalance = currentBalance;
+              const interestAccrued = startBalance * monthlyRate;
+              currentBalance = startBalance + interestAccrued;
+              
+              const monthDate = new Date(baseDate);
+              monthDate.setMonth(baseDate.getMonth() + m);
+              const dateString = monthDate.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
+              const monthLabel = monthDate.toLocaleDateString('de-DE', { month: 'long', year: 'numeric' });
+              
+              const tr = document.createElement('tr');
+              tr.style.borderBottom = '1px solid var(--border-color)';
+              tr.innerHTML = `
+                <td style="padding: 12px 10px; font-weight: 600;">${monthLabel}</td>
+                <td style="padding: 12px 10px; color: var(--text-light);">${dateString}</td>
+                <td style="padding: 12px 10px;">${formatCurrency(startBalance)}</td>
+                <td style="padding: 12px 10px; color: var(--success-text); font-weight: 700;">+ ${formatCurrency(interestAccrued)}</td>
+                <td style="padding: 12px 10px; font-weight: 700;">${formatCurrency(currentBalance)}</td>
+              `;
+              zinstabelleBody.appendChild(tr);
+            }
+          }
         }
       });
     });

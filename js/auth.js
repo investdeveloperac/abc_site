@@ -430,6 +430,31 @@ document.addEventListener('DOMContentLoaded', () => {
         const isAdmin = user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
         const isOtpVerified = sessionStorage.getItem('otpVerified') === 'true';
 
+        // Check if impersonation is active
+        const impersonateUid = sessionStorage.getItem('impersonateUid');
+        const isImpersonating = !!(impersonateUid && isAdmin);
+
+        // Show/hide impersonation banner
+        const impersonateBanner = document.getElementById('impersonateBanner');
+        if (impersonateBanner) {
+          impersonateBanner.style.display = isImpersonating ? 'block' : 'none';
+        }
+
+        // Exit impersonation button listener
+        const btnExitImpersonate = document.getElementById('btnExitImpersonate');
+        if (btnExitImpersonate) {
+          btnExitImpersonate.onclick = () => {
+            sessionStorage.removeItem('impersonateUid');
+            window.location.href = 'admin.html';
+          };
+        }
+
+        // Show/hide Verwaltung tab based on admin status
+        const adminTab = document.getElementById('adminVerwaltungTab');
+        if (adminTab) {
+          adminTab.style.display = (isAdmin && !isImpersonating) ? 'flex' : 'none';
+        }
+
         if (!isAdmin && !isOtpVerified) {
           signOut(auth).then(() => {
             window.location.href = 'login.html?error=otp';
@@ -437,7 +462,8 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
 
-        currentDocRef = doc(db, "users", user.uid);
+        const targetUid = isImpersonating ? impersonateUid : user.uid;
+        currentDocRef = doc(db, "users", targetUid);
 
         // Listen for realtime data updates
         onSnapshot(currentDocRef, (docSnap) => {
@@ -521,7 +547,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const amountNum = parseFloat(item.amount) || 0;
           const yieldNum = parseFloat(item.yield) || 0;
           const monthsNum = parseInt(item.months) || 0;
-          const earnedTotal = amountNum * (yieldNum / 100) * (monthsNum / 12);
+          const earnedTotal = amountNum * Math.pow(1 + (yieldNum / 100 / 12), monthsNum) - amountNum;
 
           const bankNameLower = (item.bank || '').toLowerCase().trim();
           let bankIconHTML = `
@@ -629,7 +655,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
 
             <div class="card-footer-row">
-              <span>Inhaber: ${data.firstName || ''} ${data.lastName || ''}</span>
+              <span>Inhaber: ${data.firstName || ''} ${data.lastName || ''}${item.coOwners ? ', ' + item.coOwners : ''}</span>
               <span style="color: var(--primary-color); font-weight: bold;">Details & Vertrag →</span>
             </div>
           `;
