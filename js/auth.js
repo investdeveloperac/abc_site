@@ -621,7 +621,10 @@ document.addEventListener('DOMContentLoaded', () => {
                   <span class="bank-name">${item.bank || 'Unbekannte Bank'}</span>
                 </div>
               </div>
-              <span class="status-badge">Aktiv</span>
+              <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                <span class="status-badge">Aktiv</span>
+                <span style="font-size: 11px; font-weight: 700; color: #94a3b8; font-family: monospace;">${item.contractNo || (user.uid.substring(0, 8).toUpperCase() + '-' + index)}</span>
+              </div>
             </div>
             
             <div class="card-grid">

@@ -152,7 +152,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('editFirstName').value = data.firstName || '';
     document.getElementById('editLastName').value = data.lastName || '';
     document.getElementById('editBirthDate').value = data.birthDate || '';
-    document.getElementById('editCustomerNo').value = data.customerNo || '';
     document.getElementById('editEmail').value = data.email || '';
     document.getElementById('editPhone').value = data.phone || '';
   };
@@ -178,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ${formatCurrency(amountNum)} @ ${item.yield || 0}% p.a. (${item.months || 0} Monate)
           </small><br>
           <small style="color: #94a3b8; font-size: 11px;">
-            Start: ${item.startDate || '—'} | Ende: ${item.endDate || '—'}${item.coOwners ? ` | Mitinhaber: ${item.coOwners}` : ''}${item.refIban ? ` | Ref: ${item.refBank || '—'} (${item.refIban})` : ''}
+            ${item.contractNo ? `Vertrag: ${item.contractNo} | ` : ''}Start: ${item.startDate || '—'} | Ende: ${item.endDate || '—'}${item.coOwners ? ` | Mitinhaber: ${item.coOwners}` : ''}${item.refIban ? ` | Ref: ${item.refBank || '—'} (${item.refIban})` : ''}
           </small>
         </div>
         <div style="display: flex; gap: 8px; align-items: center;">
@@ -220,6 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('invCoOwners').value = item.coOwners || '';
         document.getElementById('invRefBank').value = item.refBank || '';
         document.getElementById('invRefIban').value = item.refIban || '';
+        document.getElementById('invContractNo').value = item.contractNo || '';
       });
     });
 
@@ -251,7 +251,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const fName = document.getElementById('editFirstName').value.trim();
       const lName = document.getElementById('editLastName').value.trim();
       const bDate = document.getElementById('editBirthDate').value;
-      const customerNo = document.getElementById('editCustomerNo').value.trim();
       const phone = document.getElementById('editPhone').value.trim();
       const saveMsg = document.getElementById('profSaveMsg');
 
@@ -260,7 +259,6 @@ document.addEventListener('DOMContentLoaded', () => {
           firstName: fName,
           lastName: lName,
           birthDate: bDate,
-          customerNo: customerNo,
           phone: phone
         }, { merge: true });
 
@@ -303,7 +301,8 @@ document.addEventListener('DOMContentLoaded', () => {
         months: document.getElementById('invMonths').value.trim(),
         coOwners: document.getElementById('invCoOwners').value.trim(),
         refBank: document.getElementById('invRefBank').value.trim(),
-        refIban: document.getElementById('invRefIban').value.trim()
+        refIban: document.getElementById('invRefIban').value.trim(),
+        contractNo: document.getElementById('invContractNo').value.trim()
       };
 
       const isEditing = editingInvIndex !== null;
@@ -466,7 +465,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const firstName = document.getElementById('createFirstName').value.trim();
       const lastName = document.getElementById('createLastName').value.trim();
       const birthDate = document.getElementById('createBirthDate').value;
-      const customerNo = document.getElementById('createCustomerNo').value.trim();
       const email = document.getElementById('createEmail').value.trim();
       const phone = document.getElementById('createPhone').value.trim();
       const password = document.getElementById('createPassword').value.trim();
@@ -487,7 +485,6 @@ document.addEventListener('DOMContentLoaded', () => {
           firstName: firstName,
           lastName: lastName,
           birthDate: birthDate,
-          customerNo: customerNo,
           email: email,
           phone: phone,
           portfolio: []

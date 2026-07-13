@@ -34,7 +34,7 @@
           <span class="cert-user-value" id="certCoOwners">—</span>
         </div>
         <div class="cert-user-row">
-          <span class="cert-user-label">Kundennummer</span>
+          <span class="cert-user-label">Vertrag Nr.</span>
           <span class="cert-user-value" id="certCustNo">—</span>
         </div>
       </div>
@@ -296,8 +296,8 @@
           // Populate Customer details
           const fullName = (userData.firstName && userData.lastName) ? `${userData.firstName} ${userData.lastName}` : (userData.email || 'Kunde');
           document.getElementById('certCustName').textContent = fullName;
-          const customerNoVal = userData.customerNo || targetUid.substring(0, 10).toUpperCase();
-          document.getElementById('certCustNo').textContent = customerNoVal;
+          const contractNoVal = item.contractNo || (targetUid.substring(0, 8).toUpperCase() + '-' + index);
+          document.getElementById('certCustNo').textContent = contractNoVal;
 
           // Populate Co-owners if any
           const coOwnersRow = document.getElementById('certCoOwnersRow');

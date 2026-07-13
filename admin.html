@@ -101,15 +101,9 @@
               </div>
             </div>
 
-            <div class="row-group">
-              <div class="form-group" style="flex: 1;">
-                <label>Geburtsdatum</label>
-                <input type="date" id="editBirthDate" class="form-control" required>
-              </div>
-              <div class="form-group" style="flex: 1;">
-                <label>Kundennummer</label>
-                <input type="text" id="editCustomerNo" class="form-control" required>
-              </div>
+            <div class="form-group">
+              <label>Geburtsdatum</label>
+              <input type="date" id="editBirthDate" class="form-control" required>
             </div>
 
             <div class="row-group">
@@ -185,9 +179,15 @@
               </div>
             </div>
 
-            <div class="form-group">
-              <label>Weitere Inhaber (Optional, kommagetrennt)</label>
-              <input type="text" id="invCoOwners" class="form-control" placeholder="z.B. Maria Schmidt, Dr. Klaus Schmidt">
+            <div class="row-group">
+              <div class="form-group" style="flex: 1;">
+                <label>Vertrag Nr.</label>
+                <input type="text" id="invContractNo" class="form-control" placeholder="z.B. FI-2026-001" required>
+              </div>
+              <div class="form-group" style="flex: 1;">
+                <label>Weitere Inhaber (Optional, kommagetrennt)</label>
+                <input type="text" id="invCoOwners" class="form-control" placeholder="z.B. Maria Schmidt, Dr. Klaus Schmidt">
+              </div>
             </div>
 
             <div style="display: flex; align-items: center; gap: 10px;">
@@ -230,15 +230,9 @@
               </div>
             </div>
 
-            <div class="row-group" style="margin-bottom: 20px;">
-              <div class="form-group" style="flex: 1; margin-bottom: 0;">
-                <label for="createBirthDate">Geburtsdatum</label>
-                <input type="date" id="createBirthDate" class="form-control" required>
-              </div>
-              <div class="form-group" style="flex: 1; margin-bottom: 0;">
-                <label for="createCustomerNo">Kundennummer</label>
-                <input type="text" id="createCustomerNo" class="form-control" placeholder="z.B. KD-89271" required>
-              </div>
+            <div class="form-group" style="margin-bottom: 20px;">
+              <label for="createBirthDate">Geburtsdatum</label>
+              <input type="date" id="createBirthDate" class="form-control" required>
             </div>
 
             <div class="row-group" style="margin-bottom: 20px;">
