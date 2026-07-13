@@ -242,6 +242,8 @@
       'deutsche bank': 'images/Deutsche_Bank.png',
       'commerzbank': 'images/CommerzBank.png',
       'sparkasse': 'images/sparkasse.png',
+      'naspa sparkasse': 'images/sparkasse.png',
+      'naspa': 'images/sparkasse.png',
       'postbank': 'images/Postbank.png',
       'ing': 'images/ING.png',
       'ing diba': 'images/ING.png',
@@ -294,7 +296,8 @@
           // Populate Customer details
           const fullName = (userData.firstName && userData.lastName) ? `${userData.firstName} ${userData.lastName}` : (userData.email || 'Kunde');
           document.getElementById('certCustName').textContent = fullName;
-          document.getElementById('certCustNo').textContent = targetUid.substring(0, 10).toUpperCase();
+          const customerNoVal = userData.customerNo || targetUid.substring(0, 10).toUpperCase();
+          document.getElementById('certCustNo').textContent = customerNoVal;
 
           // Populate Co-owners if any
           const coOwnersRow = document.getElementById('certCoOwnersRow');

@@ -152,6 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('editFirstName').value = data.firstName || '';
     document.getElementById('editLastName').value = data.lastName || '';
     document.getElementById('editBirthDate').value = data.birthDate || '';
+    document.getElementById('editCustomerNo').value = data.customerNo || '';
     document.getElementById('editEmail').value = data.email || '';
     document.getElementById('editPhone').value = data.phone || '';
   };
@@ -250,6 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const fName = document.getElementById('editFirstName').value.trim();
       const lName = document.getElementById('editLastName').value.trim();
       const bDate = document.getElementById('editBirthDate').value;
+      const customerNo = document.getElementById('editCustomerNo').value.trim();
       const phone = document.getElementById('editPhone').value.trim();
       const saveMsg = document.getElementById('profSaveMsg');
 
@@ -258,6 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
           firstName: fName,
           lastName: lName,
           birthDate: bDate,
+          customerNo: customerNo,
           phone: phone
         }, { merge: true });
 
@@ -463,6 +466,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const firstName = document.getElementById('createFirstName').value.trim();
       const lastName = document.getElementById('createLastName').value.trim();
       const birthDate = document.getElementById('createBirthDate').value;
+      const customerNo = document.getElementById('createCustomerNo').value.trim();
       const email = document.getElementById('createEmail').value.trim();
       const phone = document.getElementById('createPhone').value.trim();
       const password = document.getElementById('createPassword').value.trim();
@@ -483,6 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
           firstName: firstName,
           lastName: lastName,
           birthDate: birthDate,
+          customerNo: customerNo,
           email: email,
           phone: phone,
           portfolio: []

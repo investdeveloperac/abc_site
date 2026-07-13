@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Footer -->
         <tr>
           <td style="padding: 30px; background-color: #f8fafc; border-top: 1px solid #e2e8f0; text-align: center; font-size: 12px; color: #94a3b8;">
-            <p style="margin: 0 0 10px 0;">FromInvest AG • Moenchaltorf, Schweiz</p>
+            <p style="margin: 0 0 10px 0;">FromInvest AG • Moenchaltorf, Schweiz • Tel: +41 (44) 523 63 89</p>
             <p style="margin: 0;">Dies ist eine automatisch generierte E-Mail. Bitte antworten Sie nicht darauf.</p>
           </td>
         </tr>
@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $headers .= "Reply-To: info@frominvest-ag.com" . "\r\n";
     $headers .= "X-Mailer: PHP/" . phpversion();
 
-    if (mail($to, $subject, $message, $headers)) {
+    if (mail($to, $subject, $message, $headers, "-f noreply@frominvest-ag.com")) {
         header('Content-Type: application/json');
         echo json_encode(["status" => "success", "message" => "OTP-Code erfolgreich gesendet."]);
     } else {

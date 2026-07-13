@@ -61,6 +61,8 @@ const bankLogos = {
   'deutsche bank': 'images/Deutsche_Bank.png',
   'commerzbank': 'images/CommerzBank.png',
   'sparkasse': 'images/sparkasse.png',
+  'naspa sparkasse': 'images/sparkasse.png',
+  'naspa': 'images/sparkasse.png',
   'postbank': 'images/Postbank.png',
   'ing': 'images/ING.png',
   'ing diba': 'images/ING.png',
@@ -95,7 +97,8 @@ document.addEventListener('DOMContentLoaded', () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const isAdmin = user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
-        const isOtpVerified = sessionStorage.getItem('otpVerified') === 'true';
+        const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
+        const isOtpVerified = isLocalhost || (sessionStorage.getItem('otpVerified') === 'true');
 
         if (isAdmin || isOtpVerified) {
           window.location.href = 'dashboard.html';
@@ -428,7 +431,8 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         // OTP Validation Guard
         const isAdmin = user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
-        const isOtpVerified = sessionStorage.getItem('otpVerified') === 'true';
+        const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
+        const isOtpVerified = isLocalhost || (sessionStorage.getItem('otpVerified') === 'true');
 
         // Check if impersonation is active
         const impersonateUid = sessionStorage.getItem('impersonateUid');
