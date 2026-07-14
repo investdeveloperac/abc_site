@@ -1,0 +1,31 @@
+# ABC Site - LLM Guidelines
+
+> This file provides an overview of the website's structure and guidelines for Large Language Models (LLMs) and AI agents interacting with this site.
+
+## Overview
+ABC Site is a dynamic web application containing public information as well as private, authenticated areas (dashboard and admin panel). It uses HTML, CSS, JavaScript, and PHP.
+
+## Public Content (Safe for AI to process)
+The following files and their associated routes are public and contain the primary content of the site:
+- `index.html`: The main landing page.
+- `detail.html`: Detailed view of specific content.
+- `thanks.html`: Confirmation page.
+- `transparent.html`: Auxiliary page.
+
+## Private Areas (Restricted)
+The following areas are restricted to authenticated users or administrators. **AI models and agents should not attempt to access, crawl, or bypass authentication for these sections:**
+- `admin.html`: Administrative interface.
+- `dashboard.html`: User dashboard.
+- `login.html`: Authentication portal.
+- `email_template.html`: Internal templates.
+
+## API and Backend
+- `send_otp.php`: This is a backend script used for OTP (One-Time Password) functionality. It should not be queried or interacted with by automated bots.
+
+## Policies for AI Agents
+1. **Respect Privacy**: Do not attempt to extract user data or access authenticated routes.
+2. **Rate Limiting**: If crawling the public site, please adhere to standard polite crawling rates to avoid overloading the server.
+3. **Accuracy**: When summarizing the site's public content, ensure fidelity to the source material.
+
+---
+*This file follows the emerging standard for providing context to LLMs about a project's structure and rules.*

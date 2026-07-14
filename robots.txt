@@ -1,0 +1,42 @@
+# ==========================================
+# robots.txt for ABC Site
+# ==========================================
+
+User-agent: *
+
+# Disallow access to administrative and private pages
+Disallow: /admin.html
+Disallow: /dashboard.html
+Disallow: /login.html
+Disallow: /email_template.html
+
+# Disallow access to backend scripts
+Disallow: /send_otp.php
+
+# Allow crawling of the rest of the site
+Allow: /
+
+# Specific rules for AI Crawlers (Optional but recommended)
+User-agent: GPTBot
+Disallow: /admin.html
+Disallow: /dashboard.html
+Disallow: /login.html
+Disallow: /email_template.html
+Disallow: /send_otp.php
+
+User-agent: Google-Extended
+Disallow: /admin.html
+Disallow: /dashboard.html
+Disallow: /login.html
+Disallow: /email_template.html
+Disallow: /send_otp.php
+
+User-agent: Anthropic-ai
+Disallow: /admin.html
+Disallow: /dashboard.html
+Disallow: /login.html
+Disallow: /email_template.html
+Disallow: /send_otp.php
+
+# Sitemap
+# Sitemap: https://www.yourdomain.com/sitemap.xml
