@@ -557,8 +557,11 @@ document.addEventListener('DOMContentLoaded', () => {
           const yieldNum = parseFloat(item.yield) || 0;
           const monthsNum = parseInt(item.months) || 0;
           const earnedTotal = amountNum * Math.pow(1 + (yieldNum / 100 / 12), monthsNum) - amountNum;
-          totalCapital += amountNum;
-          totalYield += earnedTotal;
+          
+          if (item.status !== 'inaktiv') {
+            totalCapital += amountNum;
+            totalYield += earnedTotal;
+          }
 
           const bankNameLower = (item.bank || '').toLowerCase().trim();
           let bankIconHTML = `
@@ -610,8 +613,17 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
           }
 
+          const isInaktiv = item.status === 'inaktiv';
+          const statusBadgeHTML = isInaktiv 
+            ? '<span class="status-badge" style="background-color: #f1f5f9; color: #64748b; border: 1px solid #cbd5e1;">Inaktiv</span>'
+            : '<span class="status-badge">Aktiv</span>';
+
           const card = document.createElement('div');
           card.className = 'investment-card';
+          if (isInaktiv) {
+            card.style.opacity = '0.65';
+            card.style.filter = 'grayscale(30%)';
+          }
           card.innerHTML = `
             <div class="card-header-row">
               <div class="bank-info">
@@ -622,7 +634,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
               </div>
               <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
-                <span class="status-badge">Aktiv</span>
+                ${statusBadgeHTML}
                 <span style="font-size: 11px; font-weight: 700; color: #94a3b8; font-family: monospace;">${item.contractNo || (user.uid.substring(0, 8).toUpperCase() + '-' + index)}</span>
               </div>
             </div>

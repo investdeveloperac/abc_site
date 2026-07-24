@@ -131,12 +131,18 @@
             <div class="row-group">
               <div class="form-group" style="flex: 1;">
                 <label>Bank</label>
-                <input type="text" id="invBank" class="form-control" placeholder="z.B. Deutsche Bank, ING, Sparkasse"
-                  required>
+                <input type="text" id="invBank" class="form-control" placeholder="z.B. Deutsche Bank, ING, Sparkasse" required>
               </div>
               <div class="form-group" style="flex: 1;">
                 <label>Anlageart</label>
                 <input type="text" id="invType" class="form-control" placeholder="z.B. Termingeld, Flexgeld" required>
+              </div>
+              <div class="form-group" style="flex: 1;">
+                <label>Status (Aktiv/Inaktiv)</label>
+                <select id="invStatus" class="form-control" required>
+                  <option value="aktiv">Aktiv</option>
+                  <option value="inaktiv">Inaktiv</option>
+                </select>
               </div>
             </div>
 

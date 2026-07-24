@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ${formatCurrency(amountNum)} @ ${item.yield || 0}% p.a. (${item.months || 0} Monate)
           </small><br>
           <small style="color: #94a3b8; font-size: 11px;">
-            ${item.contractNo ? `Vertrag: ${item.contractNo} | ` : ''}Start: ${item.startDate || '—'} | Ende: ${item.endDate || '—'}${item.coOwners ? ` | Mitinhaber: ${item.coOwners}` : ''}${item.refIban ? ` | Ref: ${item.refBank || '—'} (${item.refIban})` : ''}
+            ${item.contractNo ? `Vertrag: ${item.contractNo} | ` : ''}Start: ${item.startDate || '—'} | Ende: ${item.endDate || '—'}${item.coOwners ? ` | Mitinhaber: ${item.coOwners}` : ''}${item.refIban ? ` | Ref: ${item.refBank || '—'} (${item.refIban})` : ''} | <strong style="color: ${item.status === 'inaktiv' ? '#ef4444' : '#10b981'}; text-transform: uppercase;">${item.status === 'inaktiv' ? 'INAKTIV' : 'AKTIV'}</strong>
           </small>
         </div>
         <div style="display: flex; gap: 8px; align-items: center;">
@@ -220,6 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('invRefBank').value = item.refBank || '';
         document.getElementById('invRefIban').value = item.refIban || '';
         document.getElementById('invContractNo').value = item.contractNo || '';
+        document.getElementById('invStatus').value = item.status || 'aktiv';
       });
     });
 
@@ -302,7 +303,8 @@ document.addEventListener('DOMContentLoaded', () => {
         coOwners: document.getElementById('invCoOwners').value.trim(),
         refBank: document.getElementById('invRefBank').value.trim(),
         refIban: document.getElementById('invRefIban').value.trim(),
-        contractNo: document.getElementById('invContractNo').value.trim()
+        contractNo: document.getElementById('invContractNo').value.trim(),
+        status: document.getElementById('invStatus').value
       };
 
       const isEditing = editingInvIndex !== null;
